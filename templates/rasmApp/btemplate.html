@@ -1,0 +1,143 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+<style>
+     .container {
+    max-width: 100%;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  h5 {
+    font-size: 18px;
+    color: #F67007;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  th, td {
+    padding: 20px !important;
+    text-align: center;
+    border: none; /* Remove borders */
+    vertical-align: middle;
+  }
+
+  th {
+    background-color: #F0F0F0;
+    color: #333;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  td {
+    background-color: #FFF;
+    color: #333;
+  }
+
+  tr:nth-child(even) td {
+    background-color: #F7F7F7; /* Alternating row colors */
+  }
+
+  tr:hover td {
+    background-color: #eaeaea; /* Hover effect */
+  }
+
+  .table-bordered td, .table-bordered th {
+    border-bottom: 1px solid #ddd; /* Light border between rows */
+  }
+
+  .table td[rowspan="2"] {
+    background-color: #e3f2fd;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    th, td {
+      padding: 5px;
+      font-size: 12px;
+    }
+
+    h5 {
+      font-size: 16px;
+    }
+  }
+</style>
+<br><br>
+<div>
+<h5>የ2017 በጀት ዓመት የጥገና ሥራዎች ዕቅድ አፈፃፀም ማጠቃለያ (በኪ.ሜ)</h5>
+<hr>
+<table class="table table-bordered border-primary">
+    <tr>
+        <td rowspan="2" style="width: 100%;">የስራው ዓይነት</td>
+        <td colspan="3" style="text-align: center">ሐምሌ</td>
+        <td colspan="3" style="text-align: center">ነሃሴ</td>
+        <td colspan="3" style="text-align: center">መስከረም</td>
+        <td colspan="3" style="text-align: center">ጥቅምት</td>
+        <td colspan="3" style="text-align: center">ህዳር</td>
+        <td colspan="3" style="text-align: center">ታህሳስ</td>
+        <td colspan="3" style="text-align: center">ጥር</td>
+        <td colspan="3" style="text-align: center">የካቲት</td>
+        <td colspan="3" style="text-align: center">መጋቢት</td>
+        <td colspan="3" style="text-align: center">ሚያዚያ</td>
+        <td colspan="3" style="text-align: center">ግንቦት</td>
+        <td colspan="3" style="text-align: center">ሰኔ</td>
+        <td colspan="2" style="text-align: center">አጠቃላይ ድምር</td>
+        <td rowspan="2">ንጽጽር (%)</td>
+    </tr>
+    <tr>
+        {% for item in alldata %}
+            <td style="text-align: center">ዕቅድ</td>
+            <td style="text-align: center">ክንውን</td>
+            <td style="text-align: center">ንጽጽር (%)</td>
+        {% endfor %}
+        <td>ዕቅድ</td>
+        <td>ክንውን</td>
+    </tr>
+    <tr>
+    <td style="width: 100%; white-space: nowrap;">ከባድ ጥገና</td>
+    {% for item in alldata %}
+        <td>{{ item.total_aplen|floatformat:2|intcomma }}</td>
+        <td>{{ item.total_accomplen|floatformat:2|intcomma }}</td>
+        <td>{{ item.comp|floatformat:2|intcomma }}</td>
+    {% endfor %}
+    <td>{{htaplen|floatformat:2|intcomma}}</td>
+    <td>{{htaccomplen|floatformat:2|intcomma}}</td>
+    <td>{{hper|floatformat:2|intcomma}}</td>
+    </tr>
+    <tr>
+    <td style="width: 100%; white-space: nowrap;">ወቅታዊ ጥገና</td>
+    {% for item in alldata2 %}
+        <td>{{ item.total_aplen|floatformat:2|intcomma }}</td>
+        <td>{{ item.total_accomplen|floatformat:2|intcomma }}</td>
+        <td>{{ item.comp|floatformat:2|intcomma }}</td>
+    {% endfor %}
+    <td>{{rtaplen|floatformat:2|intcomma}}</td>
+    <td>{{rtaccomplen|floatformat:2|intcomma}}</td>
+    <td>{{rper|floatformat:2|intcomma}}</td>
+    </tr>
+    <tr>
+    <td style="width: 100%; white-space: nowrap;">መደበኛ ጥገና</td>
+    {% for item in alldata3 %}
+        <td>{{ item.total_aplen|floatformat:2|intcomma }}</td>
+        <td>{{ item.total_accomplen|floatformat:2|intcomma }}</td>
+        <td>{{ item.comp|floatformat:2|intcomma }}</td>
+    {% endfor %}
+    <td>{{ptaplen|floatformat:2|intcomma}}</td>
+    <td>{{ptaccomplen|floatformat:2|intcomma}}</td>
+    <td>{{pper|floatformat:2|intcomma}}</td>
+    </tr>
+</table>
+</div>
+{% endblock %}
+

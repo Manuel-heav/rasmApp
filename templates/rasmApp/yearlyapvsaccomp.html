@@ -1,0 +1,514 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+
+<style>
+    * {
+        box-sizing: border-box;
+      }
+      
+      .row {
+        margin-left:-5px;
+        margin-right:-5px;
+      }
+        
+      .column {
+        float: left;
+        width: auto;
+        padding: 0.01px;
+      }
+      
+      /* Clearfix (clear floats) */
+      .row::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+      
+      table {
+          table-layout: fixed;
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: auto;
+          border: 1px solid #ddd;
+      }
+      
+      th, td {
+        text-align: left;
+        width: auto;
+        padding: 3px;
+      }
+      
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+  </style>
+<div class="row" style="padding-left: 50px;padding-top: 20px;">
+    <h5>ከባድ ጥገና</h5>
+    <div class="column">
+    <table>
+        <tr>
+            <tr><td>ሮድ ሴግመንት</td></tr>
+            <td style="color: white;">ሮድ ሴግመንት</td>
+            {% for item in heavymaintenanc %}
+                {% if 'ሐምሌ' in item.bapmonth%}
+                    <tr><td>{{ item.erabudget__broadsegment }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            <tr><td colspan="2">ሐምሌ</td></tr>
+            <td>ዕቅድ</td> <td>ክንውን</td>
+            {% for item in heavymaintenanc %}
+                {% if 'ሐምሌ' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            <tr><td colspan="2">ነሃሴ</td></tr>
+            <td>ዕቅድ</td> <td>ክንውን</td>
+            {% for item in heavymaintenanc %}
+                {% if 'ነሃሴ' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            <tr><td colspan="2">መስከረም</td></tr>
+            <td>ዕቅድ</td> <td>ክንውን</td>
+            {% for item in heavymaintenanc %}
+                {% if 'መስከረም' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            <tr><td colspan="2">ጥቅምት</td></tr>
+            <td>ዕቅድ</td> <td>ክንውን</td>
+            {% for item in heavymaintenanc %}
+                {% if 'ጥቅምት' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            <tr><td colspan="2">ህዳር</td></tr>
+            <td>ዕቅድ</td> <td>ክንውን</td>
+            {% for item in heavymaintenanc %}
+                {% if 'ህዳር' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            <tr><td colspan="2">ታህሳስ</td></tr>
+            <td>ዕቅድ</td> <td>ክንውን</td>
+            {% for item in heavymaintenanc %}
+                {% if 'ታህሳስ' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            <tr><td colspan="2">ጥር</td></tr>
+            <td>ዕቅድ</td> <td>ክንውን</td>
+            {% for item in heavymaintenanc %}
+                {% if 'ጥር' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            <tr><td colspan="2">የካቲት</td></tr>
+            <td>ዕቅድ</td> <td>ክንውን</td>
+            {% for item in heavymaintenanc %}
+                {% if 'የካቲት' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            <tr><td colspan="2">መጋቢት</td></tr>
+            <td>ዕቅድ</td> <td>ክንውን</td>
+            {% for item in heavymaintenanc %}
+                {% if 'መጋቢት' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            <tr><td colspan="2">ሚያዚያ</td></tr>
+            <td>ዕቅድ</td> <td>ክንውን</td>
+            {% for item in heavymaintenanc %}
+                {% if 'ሚያዚያ' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            <tr><td colspan="2">ግንቦት</td></tr>
+            <td>ዕቅድ</td> <td>ክንውን</td>
+            {% for item in heavymaintenanc %}
+                {% if 'ግንቦት' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            <tr><td colspan="2">ሰኔ</td></tr>
+            <td>ዕቅድ</td> <td>ክንውን</td>
+            {% for item in heavymaintenanc %}
+                {% if 'ሰኔ' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+</div>
+<div class="row" style="padding-left: 50px;padding-top: 20px;">
+    <h5>ወቅታዊ ጥገና</h5>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in periodicmaint %}
+                {% if 'ሐምሌ' in item.bapmonth%}
+                    <tr><td>{{ item.erabudget__broadsegment }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in periodicmaint %}
+                {% if 'ሐምሌ' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in periodicmaint %}
+                {% if 'ነሃሴ' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in periodicmaint %}
+                {% if 'መስከረም' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in periodicmaint %}
+                {% if 'ጥቅምት' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in periodicmaint %}
+                {% if 'ህዳር' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in periodicmaint %}
+                {% if 'ታህሳስ' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in periodicmaint %}
+                {% if 'ጥር' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in periodicmaint %}
+                {% if 'የካቲት' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in periodicmaint %}
+                {% if 'መጋቢት' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in periodicmaint %}
+                {% if 'ሚያዚያ' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in periodicmaint %}
+                {% if 'ግንቦት' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in periodicmaint %}
+                {% if 'ሰኔ' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+</div>
+<div class="row" style="padding-left: 50px;padding-top: 20px;">
+    <h5>መደበኛ ጥገና</h5>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in routinmaint %}
+                {% if 'ሐምሌ' in item.bapmonth%}
+                    <tr><td>{{ item.erabudget__broadsegment }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in routinmaint %}
+                {% if 'ሐምሌ' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in routinmaint %}
+                {% if 'ነሃሴ' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in routinmaint %}
+                {% if 'መስከረም' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in routinmaint %}
+                {% if 'ጥቅምት' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in routinmaint %}
+                {% if 'ህዳር' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in routinmaint %}
+                {% if 'ታህሳስ' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in routinmaint %}
+                {% if 'ጥር' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in routinmaint %}
+                {% if 'የካቲት' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in routinmaint %}
+                {% if 'መጋቢት' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in routinmaint %}
+                {% if 'ሚያዚያ' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in routinmaint %}
+                {% if 'ግንቦት' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+    <div class="column">
+    <table>
+        <tr>
+            {% for item in routinmaint %}
+                {% if 'ሰኔ' in item.bapmonth%}
+                    <tr><td>{{ item.total_aplen|floatformat:2|intcomma }}</td><td>{{ item.total_accomplen|floatformat:2|intcomma }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    </div>
+</div>
+<br><br>
+
+{% endblock %}

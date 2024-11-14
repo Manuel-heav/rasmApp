@@ -1,0 +1,60 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{%load crispy_forms_tags %} 
+{% load humanize %}
+<br>
+<div class="row">
+    <div class="col">
+        <div class="card card-body ml-3 mr-3">
+            <form method="GET" action="" class="form-inline">
+                {% csrf_token %}
+                    <div>
+                    {{ myFilter.form.as_table}}
+                    <div>
+                        <button type="submit" class="btn btn- 
+                        secondary">SEARCH</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<h5>የ2017 በጀት ዓመት ዕቅድ ዝርዝር</h5>
+<br>
+<div class="card card-body ml-3 mr-3">
+    <table class="table table-sm">
+        <tr>
+            <th>ቅ/ጽ/ቤት</th>
+            <th>ፋይናንሰር</th>
+            <th>የፕሮጀክቱ ዓይነት</th>
+            <th>የፕሮጀክቱ ስም</th>
+            <th>የስራው ዓይነት</th>
+            <th>ኮንትራክተር</th>
+            <th>የኮንትራክተሩ ስም</th>
+            <th>ኮንሰልታንት</th>
+            <th>ሮድ ሴግመንት</th>
+            <th>የተመደበ በጀት</th>
+        </tr>
+        {% for i in apac %}
+        <tr>
+            <td> {{ i.bdistrict.districtname }}</td> 
+            <td> {{ i.bfinancer.financerName }}</td> 
+            <td> {{ i.bproject.project }}</td>
+            <td> {{ i.bprojectname}}</td> 
+            <td> {{ i.bworktype.maintenancetype }}</td>
+            <td> {{ i.bcontractor }}</td> 
+            <td> {{ i.bcontractorname }}</td> 
+            <td> {{ i.bconsultant }}</td> 
+            <td> {{ i.broadsegment }}</td> 
+            <td> {{ i.budgetamount|floatformat:2|intcomma }}</td> 
+           <!-- <td>{{ i.month }}</td>
+            <td>{{ i.bapinBr|floatformat:2|intcomma }}</td>
+            <td>{{ i.bapinKm|floatformat:2|intcomma }}</td>
+            <td>{{ i.financialacomp|floatformat:2|intcomma }}</td>
+            <td>{{ i.physicalacomp|floatformat:2|intcomma }}</td>-->
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

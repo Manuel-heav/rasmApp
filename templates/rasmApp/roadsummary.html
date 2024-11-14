@@ -1,0 +1,41 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+
+<style>
+    table {
+        border: 1px solid black;
+    }
+    table tr, td, th {
+        border: 1px solid black;
+    }
+</style>
+
+<h2>With django-pivot</h2>
+
+<br>
+
+<h2>Regular Table Iteration</h2>
+<table>
+    <thead>
+        <th>Id</th>
+        <th>Project Name</th>
+        <th>Asphalt</th>
+        <th>Gravel</th>
+        <th>Length</th>
+    </thead>
+    <tbody>
+        {% for row in pvt %} 
+        <tr>
+        {% for value in row.values %}
+            <td>{{value}}</td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+
+
+        
+    </tbody>
+</table>
+
+{% endblock %}

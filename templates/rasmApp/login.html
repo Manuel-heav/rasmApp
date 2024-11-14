@@ -1,0 +1,238 @@
+{% block content %}
+{% load static %}
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+</head>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    #logo{
+        height: 50px;
+    }
+
+    #logo-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #header-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 80px;
+    }
+
+    .main-btn{
+        padding: 10px 20px;
+        background-color: #FF6B00;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .navLink{
+        font-size: 17px;
+        padding: 10px 20px;
+        color: #333;
+        text-decoration: none;
+        transition: 0.5s;
+    }
+    .navLink:hover{
+        color: #f7951c;
+    }
+    .title-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 80px;
+        color: white;
+        background-color: #FF6B00;
+    }
+
+    .header-icon{
+        height: 100px;
+    }
+
+    #form-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 80px 80px;
+    }
+    
+    #form-inner-container{
+        border: 3px solid #EAEAEA;
+        padding: 60px;
+    }
+
+    #form-inner-container input{
+        width: 100%;
+        display: block;
+        padding: 8px 16px;
+        margin: 12px 0;
+        font-size: 18px;
+    }
+
+    #form-inner-container input[type="submit"]{
+        width: 100%;
+        background: #FF6B00;
+        padding: 8px 0;
+        border: none;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .footer {
+  background-color: #1E1E1E;
+  color: #fff;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 20px;
+}
+
+.footer-section {
+  margin-bottom: 20px;
+}
+
+.footer-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.footer-description {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer-list {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-list li {
+  margin-bottom: 8px;
+}
+
+.footer-list a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-list a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .footer-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+</style>
+<div class="container">
+    <header id="header-container">
+        <div id="logo-container">
+            <img src="{% static '/images/mainlogo.png' %}" alt="Federal Road Network Mapping" id="logo">
+            <h1>I - RAMS</h1>
+        </div>
+        <div>
+          <a href="" class="navLink">FRNM</a>
+          <a href="" class="navLink">RNI</a>
+          <a href="" class="navLink">Structure Information</a>
+          <a href="" class="navLink">Traffic</a>
+          <a href="" class="navLink">RMI</a>
+        </div>
+    </header>
+    <div class="title-container">
+        <img src="{% static '/images/mainlogo.png' %}" alt="Federal Road Network Mapping" class="header-icon">
+        <div>
+            <h1>Sign in to your I - RAMS Planning Account</h1>
+            <p>Use this form to sign in to your I-RAMS account</p>
+            <p>If you have any questions regarding your subscription please contact Customer Services.</p>
+        </div>
+        <img src="{% static '/images/mainlogo.png' %}" alt="Federal Road Network Mapping" class="header-icon">
+    </div>
+    <div id="form-container">
+        <div id="form-inner-container">
+            <h1 style="font-size: 25px;">Sign In to I-RAMS.gov</h1>
+            {% load crispy_forms_tags %}
+            <form method="post" id="form_login">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="" class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username">
+                <div class="mb-3">
+                    <label for="" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password">
+                </div>
+                {% if request.GET.next %}
+                    <input type="hidden" name="next" value="{{request.GET.next}}">
+                {% endif %}
+                <input type="submit" name="Create User">
+            </form>
+
+            <a href="/register">Register For New? Click Here</a>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3 class="footer-title">About ERA RAM</h3>
+        <p class="footer-description">
+          Ethiopian Road Administration (ERA) Road Asset Management is responsible for
+          overseeing and optimizing the country's road infrastructure, ensuring safety
+          and efficient use of resources.
+        </p>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Services</h3>
+        <ul class="footer-list">
+          <li><a href="#">Road Maintenance</a></li>
+          <li><a href="#">Bridge Management</a></li>
+          <li><a href="#">Budget Allocation</a></li>
+          <li><a href="#">District Management</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Contact Us</h3>
+        <ul class="footer-list">
+          <li>Email: info@era-ram.et</li>
+          <li>Phone: +251-123-4567</li>
+          <li>Address: Addis Ababa, Ethiopia</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Ethiopian Road Administration Road Asset Management. All Rights Reserved.</p>
+    </div>
+  </footer>
+  
+
+{% endblock %}
+
+
+

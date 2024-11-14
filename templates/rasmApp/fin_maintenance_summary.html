@@ -1,0 +1,258 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<style>
+    .container {
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+  
+    h5 {
+      text-align: center;
+      color: rgb(251, 112, 25);
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    thead tr td{
+        background-color: #F67007 !important; 
+        color: white !important;
+        padding: 15px !important; /* Increased padding for comfort */
+        text-align: left;
+        border-bottom: 3px solid #ddd; /* Thicker bottom border */
+        transition: background-color 0.3s ease; /* Smooth transition for hover */
+        border: none;
+    }
+    th, td {
+        border: none;
+    }
+    hr {
+      border: none;
+      border-bottom: 2px solid rgb(251, 112, 25);
+      margin-bottom: 20px;
+    }
+  
+    .table-wrapper {
+      overflow-x: auto;
+      margin-bottom: 20px;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #f9f9f9;
+    }
+  
+  
+    thead td {
+      font-weight: bold;
+      padding: 10px;
+      text-align: center;
+    }
+  
+    tbody td {
+      text-align: center;
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+  
+    tbody tr:hover {
+      background-color: #f5f5f5 !important;
+      cursor: pointer;
+    }
+
+    tr:hover td {
+            background-color: #f5f5f5; /* Orange on hover */
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        tr:hover th {
+            background-color: #F67007; /* Keep header orange on row hover */
+        }
+  
+    .paginationn {
+      text-align: center !important;
+      margin-top: 20px;
+    }
+  
+    .paginationn .btn {
+      background-color: rgb(251, 112, 25);
+      color: white;
+      padding: 10px;
+      margin: 5px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  
+    .paginationn .btn:hover {
+      background-color: gray;
+    }
+  
+    .card-layout {
+      display: none;
+    }
+  
+    @media (max-width: 768px) {
+      .table-wrapper {
+        display: none;
+      }
+  
+      .card-layout {
+        display: block;
+      }
+  
+      .card {
+        background-color: white;
+        padding: 20px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+  
+      .card h6 {
+        color: rgb(251, 112, 25);
+        font-size: 20px;
+        margin-bottom: 15px;
+        text-align: left;
+      }
+  
+      .data {
+        color: gray;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+    }
+  </style>
+
+<div class="container">
+    <h5>የ2017 በጀት ዓመት የጥገና ሥራዎች ዕቅድ አፈፃፀም ማጠቃለያ (በብር)</h5>
+    <hr>
+  
+    <div class="table-wrapper">
+      <table class="table">
+        <thead>
+          <tr>
+            <td rowspan="2">የስራው ዓይነት</td>
+            <td colspan="3">ሐምሌ</td>
+            <td colspan="3">ነሃሴ</td>
+            <td colspan="3">መስከረም</td>
+            <td colspan="2">አጠቃላይ ድምር</td>
+            <td rowspan="2">ንጽጽር (%)</td>
+          </tr>
+          <tr>
+            <td>ዕቅድ</td>
+            <td>ክንውን</td>
+            <td>ንጽጽር (%)</td>
+            <td>ዕቅድ</td>
+            <td>ክንውን</td>
+            <td>ንጽጽር (%)</td>
+            <td>ዕቅድ</td>
+            <td>ክንውን</td>
+            <td>ንጽጽር (%)</td>
+            <td>ዕቅድ</td>
+            <td>ክንውን</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ከባድ ጥገና</td>
+            <td>100,000</td>
+            <td>90,000</td>
+            <td>90%</td>
+            <td>150,000</td>
+            <td>140,000</td>
+            <td>93%</td>
+            <td>120,000</td>
+            <td>110,000</td>
+            <td>92%</td>
+            <td>370,000</td>
+            <td>340,000</td>
+            <td>91.89%</td>
+          </tr>
+          <tr>
+            <td>ግንባታ</td>
+            <td>80,000</td>
+            <td>70,000</td>
+            <td>87.5%</td>
+            <td>90,000</td>
+            <td>80,000</td>
+            <td>88.9%</td>
+            <td>85,000</td>
+            <td>75,000</td>
+            <td>88.2%</td>
+            <td>255,000</td>
+            <td>225,000</td>
+            <td>88.2%</td>
+          </tr>
+          <tr>
+            <td>መጠሪያ</td>
+            <td>50,000</td>
+            <td>45,000</td>
+            <td>90%</td>
+            <td>60,000</td>
+            <td>55,000</td>
+            <td>91.7%</td>
+            <td>55,000</td>
+            <td>50,000</td>
+            <td>90.9%</td>
+            <td>165,000</td>
+            <td>150,000</td>
+            <td>90.9%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="paginationn">
+      <button class="btn">Previous</button>
+      <button class="btn">1</button>
+      <button class="btn">2</button>
+      <button class="btn">Next</button>
+    </div>
+  
+    <!-- Responsive Design: Card layout for smaller screens -->
+    <div class="card-layout">
+      <div class="card">
+        <h6>ከባድ ጥገና</h6>
+        <div class="data">
+          <strong>ሐምሌ:</strong> ዕቅድ: 100,000 | ክንውን: 90,000 | ንጽጽር: 90% <br>
+          <strong>ነሃሴ:</strong> ዕቅድ: 150,000 | ክንውን: 140,000 | ንጽጽር: 93% <br>
+          <strong>መስከረም:</strong> ዕቅድ: 120,000 | ክንውን: 110,000 | ንጽጽር: 92% <br>
+          <strong>አጠቃላይ ድምር:</strong> ዕቅድ: 370,000 | ክንውን: 340,000 <br>
+          <strong>ንጽጽር:</strong> 91.89%
+        </div>
+      </div>
+  
+      <div class="card">
+        <h6>ግንባታ</h6>
+        <div class="data">
+          <strong>ሐምሌ:</strong> ዕቅድ: 80,000 | ክንውን: 70,000 | ንጽጽር: 87.5% <br>
+          <strong>ነሃሴ:</strong> ዕቅድ: 90,000 | ክንውን: 80,000 | ንጽጽር: 88.9% <br>
+          <strong>መስከረም:</strong> ዕቅድ: 85,000 | ክንውን: 75,000 | ንጽጽር: 88.2% <br>
+          <strong>አጠቃላይ ድምር:</strong> ዕቅድ: 255,000 | ክንውን: 225,000 <br>
+          <strong>ንጽጽር:</strong> 88.2%
+        </div>
+      </div>
+  
+      <div class="card">
+        <h6>መጠሪያ</h6>
+        <div class="data">
+          <strong>ሐምሌ:</strong> ዕቅድ: 50,000 | ክንውን: 45,000 | ንጽጽር: 90% <br>
+          <strong>ነሃሴ:</strong> ዕቅድ: 60,000 | ክንውን: 55,000 | ንጽጽር: 91.7% <br>
+          <strong>መስከረም:</strong> ዕቅድ: 55,000 | ክንውን: 50,000 | ንጽጽር: 90.9% <br>
+          <strong>አጠቃላይ ድምር:</strong> ዕቅድ: 165,000 | ክንውን: 150,000 <br>
+          <strong>ንጽጽር:</strong> 90.9%
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+{% endblock %}

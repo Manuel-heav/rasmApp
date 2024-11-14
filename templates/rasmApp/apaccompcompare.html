@@ -1,0 +1,111 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+<br>
+<br><hr><hr>
+<table>
+    <tr>
+      {% for col in dpv.columns %}
+        <td>
+          {{col}}
+        </td>
+      {% endfor %}
+    </tr>
+      {% for index, row in dpv.iterrows %}
+        <tr>
+          {% for cell in row %}
+            <td>
+              {{cell}}
+            </td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+  </table>
+
+
+
+<hr>
+<br><hr>
+<table>
+    <th></th>
+    <tr>
+    {% for employee in employees %}
+        <tr>
+            <td>ID: {{ employee.0 }}</td>
+            <td>Name: {{ employee.1 }}</td>
+            <td>Age: {{ employee.2 }} </td>
+        </tr>
+    {% endfor %}
+    </tr>
+</table>
+<hr>
+<br><br>
+<table>
+    <th></th>
+    <tr>
+    {% for employee in employees2 %}
+    <tr>
+            <td>ID: {{ employee.id }}</td>
+            <td>Name: {{ employee.name }}</td>
+            <td>Age: {{ employee.age }} </td>
+        </tr>
+    {% endfor %}
+    </tr>
+</table>
+<br><hr>
+{{apacompall}}
+
+<!--
+<table>
+    <thead>
+        <th>district</th>
+        <th>month</th>
+        <th>ap_br</th>
+        <th>ap_km</th>
+        <th>acomp_br</th>
+        <th>acomp_km</th>
+    </thead>
+    {% for i in apaccompall %}
+    <tr>
+        <td>{{i.erabudget.bdistrict}}</td>
+        <td>{{i.month}}</td>
+        <td>{{i.bapinBr|floatformat:2|intcomma}}</td>
+        <td>{{i.bapinKm|floatformat:2|intcomma}}</td>
+        <td>{{i.accomplishment.actionInBr|floatformat:2|intcomma}}</td>
+        <td>{{i.accomplishment.actionInKm|floatformat:2|intcomma}}</td>
+    </tr>
+    {% endfor %}
+</table>
+-->
+<br><br>
+<hr><hr><hr><hr>
+<div class="container">
+    <table class="table">
+        <thead class="table-light">
+            <th>ቅ/ቢሮ</th>
+            <th>የግንቦት ወር ዕቅድ (ኪ.ሜ)</th>
+            <th>የግንቦት ወር ክንውን (ኪ.ሜ)</th>
+            <th>ንጽጽር</th>
+            <th>የ11 ወራት ዕቅድ</th>
+            <th>የ11 ወራት ክንውን</th>
+        </thead>
+        {% for item, item2 in ziplast %}
+        <tr>
+            <td>{{item.erabudget__bdistrict__districtname}}</td>
+            <td>{{item.tap_len_m|floatformat:2|intcomma}}</td>
+            <td>{{item.tacomp_len_m|floatformat:2|intcomma}}</td>
+            <td>{{item.complen|floatformat:2|intcomma}}</td>
+            <td>{{item2.totapkm|floatformat:2|intcomma}}</td>
+            <td>{{item2.totacomkm|floatformat:2|intcomma}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<br>
+{% for i in apacompall %}
+    <li>{{i.erabudget__bdistrict}}--{{i.total_budget|floatformat:2|intcomma}}--{{i.total_asphalt|floatformat:2|intcomma}}--{{i.total_gravel|floatformat:2|intcomma}}--{{i.totap|floatformat:2|intcomma}}--{{i.totacom|floatformat:2|intcomma}}--{{i.fincomp|floatformat:2|intcomma}}--{{i.phycomp|floatformat:2|intcomma}}</li>
+{% endfor %}
+
+{% endblock %}

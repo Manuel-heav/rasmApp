@@ -1,0 +1,84 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+<br>
+
+<div class="container">
+    <h5 style="color: #F67007; font-weight:bold;">የ2017 በጀት ዓመት ዕቅድ ዝርዝር | Action Plan List</h5>
+    <form style="overflow: hidden; float: right;clear: both;">
+        <label for="html"> የፕሮጀክቱን ስም</label>
+        <input type="text" name="q">
+        <button> ፈልግ </button>
+    </form>
+</div>
+<hr>
+
+<!---
+<hr><hr>
+
+<div class="container">
+    <table class="table table-sm">
+        <thead class="table-light">
+            <tr>
+                <th>ፕሮጀክት</th>
+                <th>ሮድ ሴግመንት</th>
+                <th>ወር</th>
+                <th>ብር</th>
+                <th>ኪ.ሜ</th>
+                <th>አስተያየት</th>
+            </tr>
+        </thead>
+        {% for l in bap %}
+        <tr>
+            <td>{{l.erabudget}}</td>
+            <td>{{l.erabudget.bworktype}}</td>
+            <td>{{l.erabudget.broadsegment}}</td>
+            <td>{{l.bapmonth}}</td>
+            <td>{{l.bapinBr|floatformat:2|intcomma}}</td>
+            <td>{{l.bapinKm|floatformat:2}}</td>
+            <td>{{l.remark}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+-->
+<div class="container">
+    <table class="table table-sm">
+        <thead class="table-light">
+            <tr>
+                <th>ፕሮጀክት</th>
+                <th>ሮድ ሴግመንት</th>
+                <th>ወር</th>
+                <th>ብር</th>
+                <th>ኪ.ሜ</th>
+                <th>አስተያየት</th>
+            </tr>
+        </thead>
+        {% for l in page_obj.object_list %}
+        <tr>
+            <td>{{l.erabudget}}</td>
+            <td>{{l.erabudget.bworktype}}</td>
+            <td>{{l.erabudget.broadsegment}}</td>
+            <td>{{l.bapmonth}}</td>
+            <td>{{l.bapinBr|floatformat:2|intcomma}}</td>
+            <td>{{l.bapinKm|floatformat:2}}</td>
+            <td>{{l.remark}}</td>
+        </tr>
+        {% endfor %}
+        &emsp;
+        {%if page_obj.has_previous %} {# whether the previous page exists #}
+            <a href="?page=1">First</a>&ensp;
+            <a href="?page={{page_obj.previous_page_number}}">previous</a> {# link to the prev page #}&ensp;
+        {% endif %}
+        page: {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}&ensp;
+        {%if page_obj.has_next %} {# whether the next page exists #}
+            <a href="?page={{page_obj.next_page_number}}">next</a> {# link to the next page #}&ensp;
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+        <br><hr>
+    </table>
+</div>
+
+
+{% endblock %}

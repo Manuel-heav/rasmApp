@@ -1,0 +1,14 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+<h1>Register</h1>
+{% load crispy_forms_tags %}
+<form method="POST" action="">
+    {% csrf_token %}
+    {{form|crispy}}
+    <input type="submit" name="Create User">
+</form>
+</div>
+{% endblock %}

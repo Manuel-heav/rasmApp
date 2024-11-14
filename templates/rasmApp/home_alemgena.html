@@ -1,0 +1,51 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <h3 style="background-color: #F67007; color: black; text-align:center;">አለምገና ቅ/ጽ/ቤት | Alemgena District</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                <a href = "{% url 'alemgena' %}?d=አለምገና" class="btn btn-outline-primary btn-sm btn-block" style="width:100%" tabindex="-1" role="button">የ2017 ዓ.ም ፕሮጀክቶች ዝርዝር </a><br/><br/>
+                </div>
+                <div  class="col-md-3">
+                <a href = "{% url 'bapalemgena' %}?d=አለምገና" class="btn btn-outline-primary btn-sm btn-block" style="width:100%" tabindex="-1" role="button">የድርጊት መርሐግብር ዝርዝር</a><br/><br/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                <a href = "{% url 'accomplishment_reg' %}" class="btn btn-outline-primary btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ክንውን</a><br/><br/>
+                </div>
+            </div>
+            <!--
+            <div class="row">
+                <div class="col-md-3">
+                    <a href = "{% url 'alemgena_hamle' %}" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ሐምሌ</a><br>
+                    <a href = "{% url 'alemgena_nehase' %}" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ነሃሴ</a><br>
+                    <a href = "{% url 'alemgena_sep' %}" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">መስከረም</a><br>
+                    <a href = "{% url 'alemgena_oct' %}" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ጥቅምት</a><br>
+                    <a href = "{% url 'alemgena_nov' %}" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ህዳር</a><br>
+                    <a href = "{% url 'alemgena_dec' %}" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ታህሳስ</a><br>
+                    <a href = "{% url 'alemgena_jan' %}" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ጥር</a><br>
+                    <a href = "{% url 'alemgena_feb' %}" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">የካቲት</a><br>
+                    <a href = "{% url 'alemgena_mar' %}" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">መጋቢት</a><br>
+                    <a href = "{% url 'alemgena_apr' %}" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ሚያዚያ</a><br>
+                    <a href = "{% url 'alemgena_may' %}" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ግንቦት</a><br>
+                    <a href = "{% url 'alemgena_jun' %}" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ሰኔ</a><br>
+
+                </div>
+            </div>
+            -->
+        </div>
+        <div class="col-md-6">
+            <img src="{% static '/images/alemgena.jpg' %}" alt="Federal Road Network Mapping" style="display: block; margin-left: auto; margin-right: auto; width: 100%;">
+        </div>
+    </div>
+</div>
+{% endblock %}
+

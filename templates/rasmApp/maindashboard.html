@@ -1,0 +1,28 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% load static %}
+
+{% block content %}
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+</head>
+<style>
+    h1{
+        text-align: center;
+        color: #FF6B00;
+    }
+    #aboutimg{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+</style>
+<div>
+    <h1>Welcome to I-RAMS</h1>
+    <div>
+        <img src="{% static '/images/ERA-HomePage-Pic.png' %}" alt="Federal Road Network Mapping" id="aboutimg">
+    </div>
+</div>
+{% endblock %}

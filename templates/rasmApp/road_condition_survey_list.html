@@ -1,0 +1,48 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+
+<table class="table">
+    <thead>
+        <th>Road Name</th>
+        <th>Km Range</th>
+        <th>Condition</th>
+        <th>Severity</th>
+        <th>Extent</th>
+        <th>Activity Code</th>
+        <th>Activity</th>
+        <th>Quantity</th>
+    </thead>
+    {% for c in conditionserveyl%}
+    <tr>
+        <td>{{c.roadsegext.roadsegment.roadname}}</td>
+        <td>{{c.roadsegext}}</td>
+        <td>{{c.problem}}</td>
+
+        {% if c.severity == 1 %}
+        <td style="background-color: green;">{{c.severity}}</td>
+        {% elif c.severity == 2 %}
+        <td style="background-color: yellow;">{{c.severity}}</td>
+        {% elif c.severity == 3 %}
+        <td style="background-color: red;">{{c.severity}}</td>
+        {% else %}
+        <td>{{c.severity}}</td>
+        {% endif %}
+
+        {% if c.extent == 1 %}
+        <td style="background-color: green;">{{c.extent}}</td>
+        {% elif c.extent == 2 %}
+        <td style="background-color: yellow;">{{c.extent}}</td>
+        {% elif c.extent == 3 %}
+        <td style="background-color: red;">{{c.extent}}</td>
+        {% else %}
+        <td>{{c.extent}}</td>
+        {% endif %}
+
+        <td>{{c.activity.activitycode}}</td>
+        <td>{{c.activity.activity}}</td>
+        <td>{{c.qty}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

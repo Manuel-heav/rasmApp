@@ -1,0 +1,118 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<style>
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      background-color: #f9f9f9;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    th, td {
+      padding: 18px !important;
+      vertical-align: middle;
+      border: none; /* Removed borders */
+    }
+  
+    th {
+      background-color: #F0F0F0;
+      color: #333;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  
+    td {
+      background-color: #FFF;
+      color: #333;
+    }
+  
+    tr:nth-child(even) td {
+      background-color: #F7F7F7; /* Alternating row background */
+    }
+  
+    tr:hover td {
+      background-color: #eaeaea; /* Hover effect */
+    }
+  
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      th, td {
+        padding: 8px;
+        font-size: 14px;
+      }
+    }
+  </style>
+  
+
+<br>
+<div class="container">
+<table class="table">
+    <thead class="table-light">
+        <tr><th colspan="13" style="text-align: center; vertical-align:middle">የአንድ ዓመት ዕቅድ ክንውን ማነጻጸሪያ - በእያንዳንዱ ፋይናንሰር</th></tr>
+        <tr>
+            <th rowspan="2" style="text-align: center; vertical-align:middle">ቅ/ጽ/ቤት</th>
+            <th colspan="6" style="text-align: center; vertical-align:middle">ፋይናንሺያል</th>
+            <th colspan="6" style="text-align: center; vertical-align:middle">ፊዚካል</th>
+        </tr>
+        <tr>
+          <th>የሰኔ ወር ዕቅድ  (ብር)</th>
+          <th>የሰኔ ወር ክንውን  (ብር)</th>
+          <th>የወሩ ንጽጽር (%)</th>
+          <th>የአንድ ዓመት ዕቅድ</th>
+          <th>የአንድ ዓመት ክንውን</th>
+          <th>የአንድ ዓመት ንጽጽር (%)</th>
+          <th>የሰኔ ወር ዕቅድ  (ኪ.ሜ)</th>
+          <th>የሰኔ ወር ክንውን  (ኪ.ሜ)</th>
+          <th>የወሩ ንጽጽር (%)</th>
+          <th>የአንድ ዓመት ዕቅድ</th>
+          <th>የአንድ ዓመት ክንውን</th>
+          <th>የአንድ ዓመት ንጽጽር (%)</th>
+          </tr>
+    </thead>
+    {% for item, item2 in financeryrzip %}
+    <tr>
+        <td>{{item2.erabudget__bfinancer__financerName}}</td>
+        <td>{{item2.erabudget__bdistrict__districtname}}</td>
+        <td>{{item.aptotalpmonthbr|floatformat:2|intcomma}}</td>
+        <td>{{item.acomptotalpmonthbr|floatformat:2|intcomma}}</td>
+        <td>{{item.fincomppmonth|floatformat:2|intcomma }}</td>
+        <td>{{item2.aptotalbr|floatformat:2|intcomma }}</td>
+        <td>{{item2.acomptotalbr|floatformat:2|intcomma }}</td>
+        <td>{{item2.fincomp|floatformat:2|intcomma }}</td>
+        <td>{{item.aptotalpmonthkm|floatformat:2|intcomma }}</td>
+        <td>{{item.acomptotalpmonthkm|floatformat:2|intcomma }}</td>
+        <td>{{item.phycomppmonth|floatformat:2|intcomma }}</td>
+        <td>{{item2.aptotalkm|floatformat:2|intcomma }}</td>
+        <td>{{item2.acomptotalkm|floatformat:2|intcomma }}</td>
+        <td>{{item2.phycomp|floatformat:2|intcomma }}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td style="background: #f2f2f9 ;">ጠቅላላ ድምር</td>
+        <td style="background: #f2f2f9;">{{disaptpmbrsum|floatformat:2|intcomma }}</td>
+        <td style="background: #f2f2f9;">{{disacomptpmbrsum|floatformat:2|intcomma }}</td>
+        <td style="background: #f2f2f9;">{{disfincomptpmsum|floatformat:2|intcomma }}</td>
+        <td style="background: #f2f2f9;">{{disaptbrsum|floatformat:2|intcomma }}</td>
+        <td style="background: #f2f2f9;">{{disacomptbrsum|floatformat:2|intcomma }}</td>
+        <td style="background: #f2f2f9;">{{disfincompsum|floatformat:2|intcomma }}</td>
+        <td style="background: #f2f2f9;">{{disaptpmkmsum|floatformat:2|intcomma }}</td>
+        <td style="background: #f2f2f9;">{{disacomptpmkmsum|floatformat:2|intcomma }}</td>
+        <td style="background: #f2f2f9;">{{disphycomptpmsum|floatformat:2|intcomma }}</td>
+        <td style="background: #f2f2f9;">{{disaptkmsum|floatformat:2|intcomma }}</td>
+        <td style="background: #f2f2f9;">{{disacomptkmsum|floatformat:2|intcomma }}</td>
+        <td style="background: #f2f2f9;">{{disphycompsum|floatformat:2|intcomma }}</td>
+    </tr>
+</table>
+</div>
+{% endblock %}

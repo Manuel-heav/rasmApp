@@ -1,0 +1,90 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+
+<style>
+    table {
+        border: 1px solid black;
+    }
+    table tr, td, th {
+        border: 1px solid black;
+    }
+</style>
+
+<div class="container">
+<table>
+    <thead>
+        <th>የፕሮጀክቱ ስም</th>
+        <th>ሐምሌ</th>
+        <th>ነሃሴ</th>
+        <th>መስከረም</th>
+        <th>ጥቅምት</th>
+        <th>ህዳር</th>
+        <th>ታህሳስ</th>
+        <th>ጥር</th>
+        <th>የካቲት</th>
+        <th>መጋቢት</th>
+        <th>ሚያዚያ</th>
+        <th>ግንቦት</th>
+        <th>ሰኔ</th>
+    </thead>
+    <tbody>
+        {% for row in ball_pivot %} 
+            <tr>
+            {% for value in row.values %}
+                <td>{{value}}</td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+<hr><hr>
+<!--
+<div class="container">
+<table>
+    <thead>
+        <th>District</th>
+        <th>ሌሎች</th>
+        <th>መንገድ</th>
+        <th>የማማከር አገልግሎት</th>
+        <th>የቢሮ እድሳት እና ማሻሻያ ስራዎች</th>
+        <th>የቢሮ ግንባታ</th>
+        <th>የካምፕ ግንባታ</th>
+        <th>ድልድይ</th>
+    </thead>
+    <tbody>
+        {% for row in budgetsall_pivot %} 
+            <tr>
+            {% for value in row.values %}
+                <td>{{value}}</td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+<!--
+<h2>Regular Table Iteration</h2>
+<table>
+    <thead>
+        <th>Budget</th>
+        <th>District</th>
+        <th>Project</th>
+        <th>BudgetAmount</th>
+    </thead>
+    <tbody>
+        {% for item in budgetsall %}
+        <tr>
+            <td>{{item.bfinancer}}</td>
+            <td>{{ item.bdistrict }}</td>
+            <td>{{ item.bproject }}</td>
+            <td>{{ item.budgetamount }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+-->
+
+{% endblock %}

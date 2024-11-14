@@ -1,0 +1,23 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <h3 style="background-color: #F67007; color: black; text-align:center;">ደብረ ማርቆስ ቅ/ጽ/ቤት | DebreMarkos District</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <a href = "{% url 'debremarkosl' %}?d=ደብረ ማርቆስ" class="btn btn-primary" style="width:200px" tabindex="-1" role="button">የ2017 ዓ.ም ፕሮጀክቶች ዝርዝር</a><br/><br/>
+            <a href = "{% url 'bapdebremarkos' %}?d=ደብረ ማርቆስ" class="btn btn-primary" style="width:200px" tabindex="-1" role="button">የድርጊት መርሐግብር ዝርዝር</a><br/><br/>
+            <a href = "{% url 'debremarkosaccompreg' %}" class="btn btn-primary" style="width:200px" tabindex="-1" role="button">ክንውን</a><br/><br/>
+           <!-- <a href = "{% url 'accomplishl' %}?d=አዲግራት&m=ሐምሌ&u=Km" class="btn btn-primary" style="width:200px" tabindex="-1" role="button">ክንውን</a><br/><br/>-->
+        </div>
+        <div class="col-md-10">
+            <img src="{% static '/images/debremarkos.jpg' %}" alt="Federal Road Network Mapping" style="display: block; margin-left: auto; margin-right: auto; width: 60%;">
+        </div>
+    </div>
+</div>
+{% endblock %}
+

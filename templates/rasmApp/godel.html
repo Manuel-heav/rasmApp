@@ -1,0 +1,46 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+
+<br>
+
+<div class="row">
+    <div class="col-8">
+        <h5 style="color: #F67007; font-weight:bold; text-align:center;">በጎዴ መንገድ ሃብት አስተዳደር ቅ/ጽ/ቤት ስር የተያዙ ፕሮጀክቶች የበጀት ዝርዝር 2017 ዓ.ም</h5>
+    </div>
+    <!--
+    <div class="col-2">
+        <a class="btn btn-sm" name='ጎዴ' style="background-color: #F67007; color; float: right;" onclick="colorFn(this)" href="{% url 'bapgode' %}">ዕቅድ | Action Plan</a> <br><br>
+    </div>
+    <div class="col-2">
+    <a class="btn btn-sm" style="background-color: #F67007; color; float: right;" onclick="colorFn(this)" href="{% url 'accomplishlgode' %}">ክንውን | Accomplishment</a> <br><br>
+    </div>
+    -->
+</div>
+
+<form action="">
+    {% csrf_token %}
+    <table class="table table-bordered border-primary">
+        <tr>
+            <th width="10%">ቅ/ቢሮ</th>
+            <th width="10%">የፕሮጀክቱ ዓይነት</th>
+            <th width="30%">የፕሮጀክቱ ስም</th>
+            <th width="20%">የስራው ዓይነት</th>
+            <th width="20%">የመንገድ ሴግመንት</th>
+            <th width="10%">ኮንትራክተር</th>
+        </tr>
+        {% for i in gode %}
+            <tr>
+                <td>{{i.bdistrict}}</td>
+                <td>{{i.bproject}}</td>
+                <td>{{i.bprojectname}}</td>
+                <td>{{i.bworktype}}</td>
+                <td>{{i.broadsegment}}</td>
+                <td>{{i.bcontractor}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</form>
+
+
+{% endblock %}

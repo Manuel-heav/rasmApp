@@ -1,0 +1,64 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<br>
+<div class="container">
+<h5 style="color: #F67007; font-weight:bold;">ክንውን ማሳወቂያ | Accomplishment Report</h5>
+<hr>
+<form action="{% url 'search_example' %}" method="get">
+    <select name="workt">
+        <option selected disabled=true>--የስራውን ዓይነት መምራጫ--</option>
+        <option>መደበኛ ጥገና</option>
+        <option>ወቅታዊ ጥገና</option>
+        <option>ከባድ ጥገና</option>
+        <option>በአፈፃፀም ላይ የተመሰረተ መንገድ ጥገና (OPRC)</option>
+        <option>ኦቨርሌይ እና በአፈፃፀም ላይ የተመሰረተ መንገድ ጥገና</option>
+        <option>ኦቨርሌይ</option>
+        <option>የመሬት መንሸራተት እና ጎርፍ መከላከል ስራ</option>
+        <option>የመንገድ ደህንነት ስራ</option>
+        <option>የሚዛን ጣቢያ ስራዎች</option>
+        <option>የሚዛን ጣቢያ የማዘመን ስራዎች</option>
+        <option>የማማከር አገልግሎት</option>
+        <option>የከተማ አስፋልት መንገድ ማስፋት</option>
+        <option>የከተማ የአስፋልት ማልበስ ስራ (PTS)</option>
+        <option>የካሳ ክፍያ</option>
+        <option>ድልድይ መልሶ ግንባታ</option>
+        <option>ድልድይ/ፉካ ጥገና ስራ</option>
+        <option>ድንገተኛ ስራዎች</option>
+        <option>ኤርጎኖሚክስ</option>
+    </select>
+    <select name="months">
+        <option selected disabled=true>--ወሩን መምራጫ--</option>
+        <option>ሐምሌ</option>
+        <option>ነሃሴ</option>
+        <option>መስከረም</option>
+        <option>ጥቅምት</option>
+    </select>
+    <input type="submit" value="Search">
+</form>
+<hr>
+<h1> {{worktype}} -- {{month}}</h1>
+<table class="table">
+    <thead class="table-light">
+        <tr>
+            <th>የፕሮጀክቱ ስም</th>
+            <th>ሮድ ሴግመንት</th>
+            <th>ፋይናንሺያል</th>
+            <th>ፊዚካል</th>
+        </tr>
+    </thead>
+    {% for result in data %}
+    <tr>
+        <td>{{result.erabudget}}</td>
+        <td>{{result.erabudget.broadsegment}}</td>
+        <td>{{result.actionInBr|floatformat:2|intcomma}}</td>
+        <td>{{result.actionInKm|floatformat:2|intcomma}}</td>
+        <td><a class="btn btn-outline-danger btn-sm btn-block" href="{% url 'accomplish' result.id %}">ክንውን</a></td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+
+{% endblock %}

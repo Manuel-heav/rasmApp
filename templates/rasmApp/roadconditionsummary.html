@@ -1,0 +1,93 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load humanize %}
+{% load calc %}
+
+<style>
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      background-color: #f9f9f9;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    th, td {
+      padding: 18px !important;
+      vertical-align: middle;
+      border: none; /* Removed borders */
+    }
+  
+    th {
+      background-color: #F0F0F0;
+      color: #333;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  
+    td {
+      background-color: #FFF;
+      color: #333;
+    }
+  
+    tr:nth-child(even) td {
+      background-color: #F7F7F7; /* Alternating row background */
+    }
+  
+    tr:hover td {
+      background-color: #F67007; /* Hover effect */
+    }
+  
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      th, td {
+        padding: 8px;
+        font-size: 14px;
+      }
+    }
+  </style>
+  
+
+<div class="container">
+
+<table class="table">
+    <thead class="table-light">
+        <tr>
+        <th>District</th>
+        <th>Section</th>
+        <th>Road Name</th>
+        <th>Activity Code</th>
+        <th>Activity</th>
+        <th>Unit</th>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Total Amount</th>
+    </tr>
+    </thead>
+    <h5>Need Based</h5>
+    {% for c in condsummary%}
+    <tr>
+        <td>{{c.roadsegext__roadsegment__district__districtname}}</td>
+        <td>{{c.roadsegext__roadsegment__sectionname__sectionname}}</td>
+        <td>{{c.roadsegext__roadsegment__roadname}}</td>
+        <td>{{c.activity__activitycode}}</td>
+        <td>{{c.activity__activity}}</td>
+        <td>{{c.activity__unit}}</td>
+        <td>{{c.activity__urate|floatformat:2|intcomma }}</td>
+        <td>{{c.qty_total|floatformat:2|intcomma }}</td>        
+        {% with ptotal=c.activity__urate|multiply:c.qty_total %}
+        <td>{{ ptotal|floatformat:2|intcomma }}</td>
+        {% endwith %}
+
+    </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

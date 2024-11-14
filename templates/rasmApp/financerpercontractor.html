@@ -1,0 +1,65 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<div class="container">
+<h3>ፋይናንሰር፡ መንገድ ፈንድ</h3>
+<table class="table table-bordered border-primary">
+    <thead class="table-light">
+        <th>የስራው ዓይነት</th>
+        <th>አጠቃላይ በጀት</th>
+        <th>አስፋልት መንገድ ርዝመት</th>
+        <th>የጠጠር መንገድ ርዝመት</th>
+        <th>ጠቅላላ የመንገድ ርዝመት</th>
+    </thead>
+    <tr><td colspan = "4"><h5>የራስ ሀይል ተቋራጭ</h5></td></tr>
+    {% for item in ownfdata %}
+    <tr>
+        <td>{{ item.bworktype__maintenancetype }}</td>
+        <td>{{ item.total_budget|floatformat:2|intcomma }}</td>
+        <td>{{ item.total_asphalt|floatformat:2|intcomma }}</td>
+        <td>{{ item.total_gravel|floatformat:2|intcomma }}</td>
+        <td>{{ item.tsum|floatformat:2|intcomma }}</td>
+    </tr>
+    {% endfor %}
+    <tr><td>ድምር</td><td>{{ownfbsum|floatformat:2|intcomma }}</td><td>{{ownfasphsum|floatformat:2|intcomma }}</td><td>{{ownfgrvsum|floatformat:2|intcomma }}</td></tr>
+    
+    <tr><td colspan = "4"><h5>የግል ሥራ ተቋራጭ</h5></td></tr>
+    {% for item in pvtfdata %}
+    <tr>
+        <td>{{ item.bworktype__maintenancetype }}</td>
+        <td>{{ item.total_budget|floatformat:2|intcomma }}</td>
+        <td>{{ item.total_asphalt|floatformat:2|intcomma }}</td>
+        <td>{{ item.total_gravel|floatformat:2|intcomma }}</td>
+        <td>{{ item.tsum|floatformat:2|intcomma }}</td>
+    </tr>
+    {% endfor %}
+    <tr><td>ድምር</td><td>{{ pvtbsum|floatformat:2|intcomma }}</td><td>{{ pvtasphsum|floatformat:2|intcomma }}</td><td>{{ pvtgrvsum|floatformat:2|intcomma }}</td></tr>
+    
+    <tr><td colspan = "4"><h5>የግል የማማከር አገልግሎት</h5></td></tr>
+    {% for item in consultdata %}
+    <tr>
+        <td>{{ item.bworktype__maintenancetype }}</td>
+        <td>{{ item.total_budget|floatformat:2|intcomma }}</td>
+        <td>{{ item.total_asphalt|floatformat:2|intcomma }}</td>
+        <td>{{ item.total_gravel|floatformat:2|intcomma }}</td>
+        <td>{{ item.tsum|floatformat:2|intcomma }}</td>
+    </tr>
+    {% endfor %}
+    <tr><td>ድምር</td><td>{{ consbsum|floatformat:2|intcomma }}</td><td>{{ consasphsum|floatformat:2|intcomma }}</td><td>{{ consgrvsum|floatformat:2|intcomma }}</td></tr>
+    
+    <tr><td colspan = "4"><h5>በግዢ ሂደት ላይ</h5></td></tr>
+    {% for item in purchasedata %}
+    <tr>
+        <td>{{ item.bworktype__maintenancetype }}</td>
+        <td>{{ item.total_budget|floatformat:2|intcomma }}</td>
+        <td>{{ item.total_asphalt|floatformat:2|intcomma }}</td>
+        <td>{{ item.total_gravel|floatformat:2|intcomma }}</td>
+        <td>{{ item.tsum|floatformat:2|intcomma }}</td>
+    </tr>
+    {% endfor %}
+    <tr><td>ድምር</td><td>{{ purchbsum|floatformat:2|intcomma }}</td><td>{{ purchasphsum|floatformat:2|intcomma }}</td><td>{{ purchgrvsum|floatformat:2|intcomma }}</td></tr>
+</table>
+</div>
+{% endblock %}

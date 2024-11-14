@@ -1,0 +1,90 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% load static %}
+{% block content %}
+{% load humanize %}
+
+
+<style>
+    table {
+        width: 80%;
+        border: 1px solid black;
+    }
+    table th {
+        border: 1px solid black;
+        font-weight:bold;
+    }
+    table tr, td {
+        border: 1px solid black;
+    }
+</style>
+
+<div class="container">
+<h3 style="color: #F67007; font-weight:bold; text-align:center;">ዓመታዊ የበጀት ዝርዝር 2017 ዓ.ም | Annual Budget List 2024/25</h3>
+<br/>
+<div class="container">
+    <form style="overflow: hidden; float: right;clear: both;">
+        <label for="html">ቅ/ቢሮ ወይም የፕሮጀክቱ ዓይነት</label>
+        <input type="text" name="q">
+        <button> ፈልግ </button>
+    </form>
+</div>
+<br/><br/>
+<table class="table table-light table-striped table-bordered" border='2' style='border-collapse:collapse'>
+    <thead>
+        <tr>
+            <th>ተራ.ቁ</th>
+            <th>ቅ/ቢሮ</th>
+            <th>ፋይናንሰር</th>
+            <th>ፕሮጀክት</th>
+            <th>የፕሮጀክት ስም</th>
+            <th>የስራው ዓይነት</th>
+            <th>ክልል</th>
+            <th>ተቋራጭ</th>
+            <th>የተቋራጭ ስም</th>
+            <th>የአማካሪ ስም</th>
+            <th>ሮድ ሴግመንት</th>
+            <th>በጀት ዓመት</th>
+            <th>የጸደቀ በጀት (ብር)</th>
+            <th>የሚጠገን አስፋልት ርዝመት</th>
+            <th>የሚጠገን ጠጠር ርዝመት</th>
+            <th>አስተያየት</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for budget in page_obj.object_list %}
+        <tr>
+            <td>{{ budget.id }}</td>
+            <td>{{ budget.bdistrict }}</td>
+            <td>{{ budget.bfinancer }}</td>
+            <td>{{ budget.bproject }}</td>
+            <td>{{ budget.bprojectname }}</td>
+            <td>{{ budget.bworktype }}</td>
+            <td>{{ budget.bregions }}</td>
+            <td>{{ budget.bcontractor }}</td>
+            <td>{{ budget.bcontractorname }}</td>
+            <td>{{ budget.bconsultant }}</td>
+            <td>{{ budget.broadsegment }}</td>
+            <td>{{ budget.byear }}</td>
+            <td>{{ budget.budgetamount|floatformat:2|intcomma  }}</td>
+            <td>{{ budget.basphalt|floatformat:2 }}</td>
+            <td>{{ budget.bgravel|floatformat:2 }}</td>
+            <td>{{ budget.remark }}</td>
+        </tr>
+        {% endfor %}
+        &emsp;
+        {%if page_obj.has_previous %} {# whether the previous page exists #}
+            <a href="?page=1">First</a>&ensp;
+            <a href="?page={{page_obj.previous_page_number}}">previous</a> {# link to the prev page #}&ensp;
+        {% endif %}
+        page: {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}&ensp;
+        {%if page_obj.has_next %} {# whether the next page exists #}
+            <a href="?page={{page_obj.next_page_number}}">next</a> {# link to the next page #}&ensp;
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+        <br><hr>
+    
+
+    </tbody>
+</table>
+</div>
+{% endblock %}

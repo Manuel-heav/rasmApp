@@ -1,0 +1,31 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+
+<br><br>
+<div class="container">
+    <h5>በ2017 የመንገድ ጥገና ስራ የሚጠገን ጠቅላላ የመንገድ ርዝመት (ኪ.ሜ)</h5>
+    <hr><br>
+    <table class="table">
+        <thead class="table-light">
+            <th>የሥራው ዓይነት</th>
+            <th>በ2017 የሚጠገን የአስፋልት መንገድ ርዝመት (ኪ.ሜ)</th>
+            <th>በ2017 የሚጠገን የጠጠር መንገድ ርዝመት (ኪ.ሜ)</th>
+            <th>በ2017 የሚጠገን ጠቅላላ የመንገድ ርዝመት (ኪ.ሜ)</th>
+        </thead>
+        {% for field in allbyprojsummary %}
+        <tr>
+            <td>{{field.erabudget__bworktype__maintenancetype}}</td>
+                <td>{{field.erabudget__bprojectname}}</td>
+            <td>{{field.total_asphalt|floatformat:2|intcomma}}</td>
+            <td>{{field.total_gravel|floatformat:2|intcomma}}</td>
+            <td>{{field.total_sum|floatformat:2|intcomma}}</td>
+        </tr>
+        {% endfor %}
+        <tr><td>ድምር</td><td>{{tasphalt_sum|floatformat:2|intcomma}}</td><td>{{tgravel_sum|floatformat:2|intcomma}}</td><td>{{tsum|floatformat:2|intcomma}}</td></tr>
+    </table>
+</div>
+
+{% endblock %}

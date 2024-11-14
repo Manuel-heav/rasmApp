@@ -1,0 +1,83 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+
+<style>
+    table {
+        width: 80%;
+        border: 1px solid black;
+    }
+    table tr, td, th {
+        border: 1px solid black;
+    }
+</style>
+
+<br>
+
+<div class="container">
+<h5 style="color: #F67007; font-weight:bold;">በ2017 በጀት ዓመት የጸደቀው በጀት በሥራው ዓይነት</h5>
+<div class="container">
+    <table>
+        <th>የሥራው ዓይነት</th>
+        <th>ጠቅላላ ዕቅድ (ፋይናንሽያል)</th>
+        <th>ጠቅላላ ክንውን (ፋይናንሽያል)</th>
+        <th>ጠቅላላ ዕቅድ (ፊዚካል)</th>
+        <th>ጠቅላላ ክንውን (ፊዚካል)</th>
+        {% for item in grouped_data %}
+        <tr>
+            <td>{{ item.erabudget__bworktype__maintenancetype }}</td> 
+            <td>{{ item.total_value1|floatformat:2|intcomma }}</td> 
+            <td>{{ item.total_value3|floatformat:2|intcomma }}</td> 
+            <td>{{ item.total_value2|floatformat:2|intcomma }}</td>
+            <td>{{ item.total_value4|floatformat:2|intcomma }}</td>
+        </tr>
+        {% endfor %}
+        <tr><td>ድምር</td><td>{{ total_sum1|floatformat:2|intcomma }}</td><td>{{ total_sum2|floatformat:2|intcomma }}</td></tr>
+    </table>
+</div>
+<h2>Total Birr: {{ total_sum1 }}</h2>
+<h2>Total Km: {{ total_sum2 }}</h2>
+<h5>{{busum}}</h5>
+<h5>ሙከጡሪ ሴክሽን መደበኛ ጥገና ጠቅላላ በጀት፡ {{bp}}</h5>
+</div>
+<div class="container">
+    <table class="table table-bordered table-striped table-light">
+        <th>የፕሮጀክቱ ዓይነት</th>
+        <th>የፕሮጀክቱ ስም</th>
+        <th>ጠቅላላ ብር</th>
+        {% for item in bplst %}
+        <tr>
+            <td>{{ item.erabudget__bproject }}</td>
+            <td>{{ item.erabudget__bprojectname }}</td>
+            <td>{{ item.total_value|floatformat:2|intcomma }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<div class="row">
+    <ul>
+    {% for b in erabudget %}
+        {{b.bprojectname}}
+        <ul>
+        <div class="row">
+        {% for budgetedap in b.budgetedap_set.all%}
+                <div class="col">
+                    <div class="row">
+            {{budgetedap.bapmonth}}
+                </div>
+                <div class="row">
+            {{budgetedap.bapinBr}}
+                </div>
+                <div class="row">
+            {{budgetedap.bapinKm}}
+                </div>
+                </div>
+        {% endfor %}
+        </div>
+        </ul>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

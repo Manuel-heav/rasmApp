@@ -1,0 +1,194 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% block content %}
+
+<style>
+    /* General card styles */
+    table {
+    width: 100%;
+    border-collapse: collapse; /* Ensures no gaps between cells */
+    border: none; /* Removes all borders */
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 20px 15px !important; /* Adjust the padding to your liking */
+    text-align: left;
+    border: none; /* Removes borders from table cells */
+}
+
+    .card {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border: none;
+        margin-bottom: 20px;
+    }
+    .card-body {
+        padding: 25px;
+        background-color: #ffffff;
+    }
+
+    /* Typography and layout */
+    .row {
+        margin: 0 auto;
+        max-width: 1000px;
+    }
+    p {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+        line-height: 1.6;
+    }
+
+    .highlight {
+        color: #F67007;
+        font-weight: bold;
+    }
+
+    /* Custom Button Styles */
+    .btn-custom {
+        display: inline-block;
+        padding: 10px 15px;
+        font-size: 1em;
+        text-align: center;
+        color: #F67007;
+        background-color: transparent;
+        border: 2px solid #F67007;
+        border-radius: 6px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .btn-custom:hover {
+        background-color: #F67007;
+        color: white;
+    }
+
+    .btn-block {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    /* Table Styling */
+    table {
+        width: 100%;
+        border: none;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #F67007;
+        color: white;
+        font-size: 1.1em;
+    }
+
+    td {
+        background-color: #f9f9f9;
+    }
+
+    tr:nth-child(even) td {
+        background-color: #f2f2f2;
+    }
+
+    /* Link Buttons */
+    .table-btn {
+        color: #F67007;
+        text-decoration: none;
+        padding: 5px 10px;
+        border: 2px solid #F67007;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin: 20px;
+    }
+
+    .delete-btn {
+        color: red;
+        border: 2px solid red;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin: 20px;
+    }
+
+    .delete-btn:hover {
+        background-color: red;
+        color: #fff;
+    }
+
+    .update-btn {
+        color: #000;
+        border: 2px solid yellow;
+    }
+
+    .update-btn:hover {
+        background-color: yellow;
+        color: #000;
+    }
+
+    .action-btn:hover {
+        background-color: #F67007;
+        color: #fff;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .row {
+            padding: 0 10px;
+        }
+        table, th, td {
+            font-size: 0.9em;
+        }
+    }
+</style>
+
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <hr>
+            <p>ቅ/ቢሮ: &emsp;<span class="highlight">{{anbudget.bdistrict}}</span></p>
+            <p>የስራው ዓይነት: &emsp;<span class="highlight">{{anbudget.bworktype}}</span></p>
+            <p>የፕሮጀክቱ ዓይነት: &emsp;<span class="highlight">{{anbudget.bproject}}</span></p>
+            <p>የፕሮጀክቱ ስም: &emsp;<span class="highlight">{{anbudget.bprojectname}}</span></p>
+            <p>አስፋልት: &emsp;<span class="highlight">{{anbudget.basphalt}}</span></p>
+            <p>ጠጠር: &emsp;<span class="highlight">{{anbudget.bgravel}}</span></p>
+            <a class="btn-custom btn-block" href="{% url 'create_budgetedap' anbudget.id %}">አክሽን ፕላን</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ወር</th>
+                        <th>ዕቅድ በብር</th>
+                        <th>ዕቅድ በኪ.ሜ</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in bap %}
+                    <tr>
+                        <td>{{i.bapmonth}}</td>
+                        <td>{{i.bapinBr}}</td>
+                        <td>{{i.bapinKm}}</td>
+                        <td class="btn-container">
+                            <a class="table-btn action-btn" href="{% url 'create_apsummary' i.id %}">ክንውን</a>
+                            <a class="table-btn update-btn" href="{% url 'update_actionplan' i.id %}">Update</a>
+                            <a class="table-btn delete-btn" href="{% url 'delete_actionplan' i.id %}">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

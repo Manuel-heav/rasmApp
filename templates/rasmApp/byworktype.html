@@ -1,0 +1,144 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<style>
+    table {
+        border-collapse: collapse;
+        border: none;
+        width: 100%;
+    }
+    .styled-table {
+        margin: 20px 0;
+        font-size: 1.2em;
+        text-align: left;
+    }
+    th {
+        background-color: #F67007 !important; /* Orange header */
+        color: white !important;
+        padding: 15px !important; /* Increased padding for comfort */
+        text-align: left;
+        border-bottom: 3px solid #ddd; /* Thicker bottom border */
+        transition: background-color 0.3s ease; /* Smooth transition for hover */
+        border: none;
+    }
+    th, td {
+        border: none;
+    }
+    tr:nth-child(even) td {
+        background-color: #f2f2f2; /* Alternate row color */
+    }
+    tr:hover td {
+        background-color: #F67007; /* Orange on hover */
+        color: white; /* Change text color to white on hover */
+        transition: background-color 0.3s ease; /* Smooth transition */
+    }
+    tr:hover th {
+        background-color: #F67007; /* Keep header orange on row hover */
+    }
+    .hidden-col {
+        display: none;
+    }
+    .nav-btn {
+        background-color: #f8d7b0;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        color: #9a3422;
+        font-size: 1em;
+        margin-right: 10px;
+    }
+    .nav-btn:hover {
+        background-color: #f0b075;
+    }
+    .button-container {
+        margin-top: 20px;
+    }
+</style>
+
+<div id="table-container">
+    <table class="table styled-table">
+        <thead class="table-light">
+            <tr>
+                <th>የሥራው ዓይነት</th>
+                <th class="first-six">ሐምሌ</th>
+                <th class="first-six">ነሃሴ</th>
+                <th class="first-six">መስከረም</th>
+                <th class="first-six">ጥቅምት</th>
+                <th class="first-six">ህዳር</th>
+                <th class="hidden-col">ታህሳስ</th>
+                <th class="hidden-col">ጥር</th>
+                <th class="hidden-col">የካቲት</th>
+                <th class="hidden-col">መጋቢት</th>
+                <th class="hidden-col">ሚያዚያ</th>
+                <th class="hidden-col">ግንቦት</th>
+                <th class="hidden-col">ሰኔ</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in apsall_pivot %}
+            <tr>
+                {% for value in row.values %}
+                <td class="{% if forloop.counter > 6 %}hidden-col{% endif %}">{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="button-container">
+    <button class="nav-btn" id="back-btn" style="display: none;">Back</button>
+    <button class="nav-btn" id="next-btn">Next</button>
+</div>
+
+<script>
+    const nextBtn = document.getElementById('next-btn');
+    const backBtn = document.getElementById('back-btn');
+    const tableContainer = document.getElementById('table-container');
+    
+    // Select both first-six and hidden-col as part of a single sequence
+    const allCols = document.querySelectorAll('.first-six, .hidden-col');
+    const totalCols = allCols.length;
+    const pageSize = 5; // Since your table initially shows 6 columns, paginate in sets of 6
+    let currentPage = 0; // Track the current page
+
+    function updateTableVisibility() {
+        // Hide all columns initially
+        allCols.forEach((col, index) => {
+            col.style.display = 'none';
+        });
+
+        // Show only the columns for the current page
+        allCols.forEach((col, index) => {
+            if (index >= currentPage * pageSize && index < (currentPage + 1) * pageSize) {
+                col.style.display = 'table-cell';
+            }
+        });
+
+        // Hide or show navigation buttons
+        backBtn.style.display = currentPage > 0 ? 'inline-block' : 'none';
+        nextBtn.style.display = (currentPage + 1) * pageSize < totalCols ? 'inline-block' : 'none';
+    }
+
+    nextBtn.addEventListener('click', () => {
+        if ((currentPage + 1) * pageSize < totalCols) {
+            currentPage++;
+            updateTableVisibility();
+        }
+    });
+
+    backBtn.addEventListener('click', () => {
+        if (currentPage > 0) {
+            currentPage--;
+            updateTableVisibility();
+        }
+    });
+
+    // Initialize the display
+    updateTableVisibility();
+</script>
+
+
+{% endblock %}

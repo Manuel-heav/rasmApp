@@ -1,0 +1,57 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<style>
+    table {
+        width: 80%;
+        border: 1px solid black;
+    }
+    table tr, td, th {
+        border: 1px solid black;
+    }
+</style>
+
+<br>
+
+<div class="container">
+    <h5 style="color: #F67007; font-weight:bold;">በ2017 በጀት ዓመት የጸደቀው በጀት በፕሮጀክቶቹ ዓይነት</h5>
+    <form style="overflow: hidden; float: right;clear: both;">
+        <label for="html"> የፕሮጀክቱ ዓይነት ወይም የፕሮጀክቱን ስም</label>
+        <input type="text" name="q">
+        <button> ፈልግ </button>
+    </form>
+</div>
+
+<hr>
+<div class="container">
+    <table class="table">
+        <thead class="table-light">
+            <th>የፕሮጀክቱ ዓይነት</th>
+            <th>የፕሮጀክቱ ስም</th>
+            <th>ጠቅላላ ብር</th>
+        </thead>
+        {% for item in page_obj.object_list %}
+        <tr>
+            <td>{{ item.erabudget__bproject__project }}</td>
+            <td>{{ item.erabudget__bprojectname }}</td>
+            <td>{{ item.total_value|floatformat:2|intcomma }}</td>
+        </tr>
+        {% endfor %}
+        &emsp;
+        {%if page_obj.has_previous %} {# whether the previous page exists #}
+            <a href="?page=1">First</a>&ensp;
+            <a href="?page={{page_obj.previous_page_number}}">previous</a> {# link to the prev page #}&ensp;
+        {% endif %}
+        page: {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}&ensp;
+        {%if page_obj.has_next %} {# whether the next page exists #}
+            <a href="?page={{page_obj.next_page_number}}">next</a> {# link to the next page #}&ensp;
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+        <br><hr>
+
+    </table>
+</div>
+
+{% endblock %}

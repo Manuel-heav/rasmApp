@@ -1,0 +1,37 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<div class="container">
+<h5 style="color: #F67007; font-weight:bold; text-align:center;">ለቅ/ጽ/ቤቶች የተያዘ በጀት ከፕሮጀክቶች ዓይነት አንጻር</h5>
+<br>
+<table class="table">
+    <thead class="table-light">
+        <th>የሥራው ዓይነት</th>
+        <th>መስክረም</th>
+        <th>ጥቅምት</th>
+        <th>ህዳር</th>
+        <th>ታህሳስ</th>
+        <th>ጥር</th>
+        <th>የካቲት</th>
+        <th>መጋቢት</th>
+        <th>ሚያዚያ</th>
+        <th>ግንቦት</th>
+        <th>ሰኔ</th>
+        <th>ሐምሌ</th>
+        <th>ነሐሴ</th>
+        <th>ድምር</th>
+    </thead>
+    <tbody>
+        {% for row in aplist_pivot %} 
+            <tr>
+            {% for value in row.values %}
+                <td>{{value}}</td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

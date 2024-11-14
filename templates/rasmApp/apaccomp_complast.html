@@ -1,0 +1,193 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+{% load calc %}
+
+<style>
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      background-color: #f9f9f9;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    th, td {
+      padding: 18px !important;
+      vertical-align: middle;
+      border: none; /* Removed borders */
+    }
+  
+    th {
+      background-color: #F0F0F0;
+      color: #333;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  
+    td {
+      background-color: #FFF;
+      color: #333;
+    }
+  
+    tr:nth-child(even) td {
+      background-color: #F7F7F7; /* Alternating row background */
+    }
+  
+    tr:hover td {
+      background-color: #eaeaea; /* Hover effect */
+    }
+  
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      th, td {
+        padding: 8px;
+        font-size: 14px;
+      }
+    }
+
+    /* Pagination styles */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .pagination button {
+      margin: 0 5px;
+      padding: 5px 10px;
+      background-color: #f0f0f0;
+      border: 1px solid #ddd;
+      cursor: pointer;
+    }
+
+    .pagination button:hover {
+      background-color: #e0e0e0;
+    }
+
+    .pagination button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  </style>
+  
+
+<br>
+<div class="container">
+<table class="table" id="dataTable">
+    <thead class="table-light">
+        <tr><th colspan="21" style="text-align: center; vertical-align:middle">የአንድ ዓመት ዕቅድ ክንውን ማነጻጸሪያ - በእያንዳንዱ ፕሮጀክት</th></tr>
+        <tr>
+            <th rowspan="2" style="text-align: center; vertical-align:middle">የፕሮጀክቱ ስም</th>
+            <th colspan="9" style="text-align: center; vertical-align:middle">ፋይናንሺያል</th>
+            <th colspan="9" style="text-align: center; vertical-align:middle">ፊዚካል</th>
+        </tr>
+        <tr>
+          <th>የ11 ወራት ዕቅድ  (ብር)</th>
+          <th>የ11 ወራት ክንውን  (ብር)</th>
+          <th>የ11 ወራት ንጽጽር (%)</th>
+          <th>የሰኔ ወር ዕቅድ  (ብር)</th>
+          <th>የሰኔ ወር ክንውን  (ብር)</th>
+          <th>የወሩ ንጽጽር (%)</th>
+          <th>የአንድ ዓመት ዕቅድ</th>
+          <th>የአንድ ዓመት ክንውን</th>
+          <th>የአንድ ዓመት ንጽጽር (%)</th>
+          <th>የ11 ወራት ዕቅድ  (ኪ.ሜ)</th>
+          <th>የ11 ወራት ክንውን  (ኪ.ሜ)</th>
+          <th>የ11 ወራት ንጽጽር (%)</th>
+          <th>የሰኔ ወር ዕቅድ  (ኪ.ሜ)</th>
+          <th>የሰኔ ወር ክንውን  (ኪ.ሜ)</th>
+          <th>የወሩ ንጽጽር (%)</th>
+          <th>የአንድ ዓመት ዕቅድ</th>
+          <th>የአንድ ዓመት ክንውን</th>
+          <th>የአንድ ዓመት ንጽጽር (%)</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for item, item2 in projyrzip %}
+    <tr>
+      <td>{{item2.erabudget__bprojectname}}</td>
+      {% with prevap=item2.aptotalbr|subtract:item.aptotalpmonthbr %}
+      <td>{{ prevap|floatformat:2|intcomma }}</td>
+      {% endwith %}
+      {% with prevacomp=item2.acomptotalbr|subtract:item.acomptotalpmonthbr %}
+      <td>{{ prevacomp|floatformat:2|intcomma }}</td>
+      {% endwith %}
+      {% with prevacomp=item2.acomptotalbr|subtract:item.acomptotalpmonthbr prevap=item2.aptotalbr|subtract:item.aptotalpmonthbr %}
+      <td>{{ prevacomp|divide:prevap |floatformat:2|intcomma}}</td>
+      {% endwith %}
+      <td>{{item.aptotalpmonthbr|floatformat:2|intcomma}}</td>
+      <td>{{item.acomptotalpmonthbr|floatformat:2|intcomma}}</td>
+      <td>{{item.fincomppmonth|floatformat:2|intcomma }}</td>
+      <td>{{item2.aptotalbr|floatformat:2|intcomma }}</td>
+      <td>{{item2.acomptotalbr|floatformat:2|intcomma }}</td>
+      <td>{{item2.fincomp|floatformat:2|intcomma }}</td>
+      {% with prevapkm=item2.aptotalkm|subtract:item.aptotalpmonthkm %}
+      <td>{{ prevapkm|floatformat:2|intcomma }}</td>
+      {% endwith %}
+      {% with prevacompkm=item2.acomptotalkm|subtract:item.acomptotalpmonthkm %}
+      <td>{{ prevacompkm|floatformat:2|intcomma }}</td>
+      {% endwith %}
+      {% with prevacompkm=item2.acomptotalkm|subtract:item.acomptotalpmonthkm prevapkm=item2.aptotalkm|subtract:item.aptotalpmonthkm %}
+      <td>{{ prevacompkm|divide:prevapkm |floatformat:2|intcomma}}</td>
+      {% endwith %}
+      <td>{{item.aptotalpmonthkm|floatformat:2|intcomma }}</td>
+      <td>{{item.acomptotalpmonthkm|floatformat:2|intcomma }}</td>
+      <td>{{item.phycomppmonth|floatformat:2|intcomma }}</td>
+      <td>{{item2.aptotalkm|floatformat:2|intcomma }}</td>
+      <td>{{item2.acomptotalkm|floatformat:2|intcomma }}</td>
+      <td>{{item2.phycomp|floatformat:2|intcomma }}</td>
+  </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div class="pagination">
+    <button id="prevBtn" onclick="changePage(-1)" disabled>Previous</button>
+    <span id="pageInfo"></span>
+    <button id="nextBtn" onclick="changePage(1)">Next</button>
+</div>
+</div>
+
+<script>
+    let currentPage = 1;
+    const rowsPerPage = 10;
+    const table = document.getElementById('dataTable');
+    const rows = table.getElementsByTagName('tbody')[0].rows;
+    const pageInfo = document.getElementById('pageInfo');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function showPage(page) {
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+
+        for (let i = 0; i < rows.length; i++) {
+            if (i >= start && i < end) {
+                rows[i].style.display = '';
+            } else {
+                rows[i].style.display = 'none';
+            }
+        }
+
+        pageInfo.textContent = `Page ${page} of ${Math.ceil(rows.length / rowsPerPage)}`;
+        prevBtn.disabled = page === 1;
+        nextBtn.disabled = page === Math.ceil(rows.length / rowsPerPage);
+    }
+
+    function changePage(direction) {
+        currentPage += direction;
+        showPage(currentPage);
+    }
+
+    showPage(1);
+</script>
+
+{% endblock %}

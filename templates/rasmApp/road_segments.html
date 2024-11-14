@@ -1,0 +1,177 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    .styled-table {
+        margin: 20px 0;
+        font-size: 1.2em;
+        text-align: left;
+    }
+    th {
+        background-color: #F67007 !important; 
+        color: white !important;
+        padding: 15px; 
+        text-align: left;
+        border-bottom: 3px solid #ddd; 
+        transition: background-color 0.3s ease; 
+        border: none;
+    }
+    th, td {
+        border: none;
+        padding: 10px 15px; /* Consistent padding for all cells */
+        text-align: left;
+    }
+    td {
+        word-wrap: break-word; /* Handle long text overflow */
+        max-width: 300px; /* Limit maximum width of text cells */
+    }
+    tr:nth-child(even) td {
+        background-color: #f2f2f2;
+    }
+    tr:hover td {
+        background-color: #F67007;
+        color: white;
+        transition: background-color 0.3s ease;
+    }
+    tr:hover th {
+        background-color: #F67007;
+    }
+    .action-plan {
+        background-color: #F67007;
+        width: 200px;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .action-plan:hover {
+        background-color: #fff;
+        color: black;
+    }
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        padding: 20px 0;
+    }
+    .pagination a {
+        color: #F67007;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+        transition: background-color .3s;
+        border: 1px solid #ddd;
+        margin: 0 4px;
+    }
+    .pagination a:hover {
+        background-color: #ddd;
+    }
+    .pagination a.active {
+        background-color: #F67007;
+        color: white;
+        border: 1px solid #F67007;
+    }
+    .pagination a.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+</style>
+
+<br>
+<div class="row">
+    <h1 style="font-size: 2em; margin: 0.67em 0;color:#F67007;">Road Segments List:</h1>
+    <hr>
+    <div class="card card-body">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th width="10%">District</th>
+                    <th width="20%">Section</th>
+                    <th width="15%">Road Name</th>
+                    <th width="35%">Asphalt</th>
+                    <th width="10%">Gravel</th>
+                    <th width="10%">Total</th>
+                    <th width="10%">RFC Id</th>
+                    <th width="10%">Surface Type</th>
+                    <th width="10%">RFC Class</th>
+                    <th width="10%">Design Standard</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                {% for r in roadsegments %}
+                <tr>
+                    <td>{{r.district}}</td>
+                    <td>{{r.sectionname}}</td>
+                    <td>{{r.roadname}}</td>
+                    <td>{{r.asphaltlength}}</td>
+                    <td>{{r.gravellength}}</td>
+                    <td>{{r.totall}}</td>
+                    <td>{{r.rfc_id}}</td>
+                    <td>{{r.surfacetype}}</td>
+                    <td>{{r.rfcclass}}</td>
+                    <td>{{r.designstd}}</td>
+                    <td><a class="btn action-plan" href="{% url 'road_segment_exts' r.id %}">Segment</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Pagination Links -->
+        <div class="pagination">
+            <a href="#" class="prev disabled">&laquo; Prev</a>
+            <a href="#" class="next">Next &raquo;</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    const rowsPerPage = 10; // Number of rows per page
+    const rows = document.querySelectorAll('#table-body tr');
+    const totalPages = Math.ceil(rows.length / rowsPerPage);
+    let currentPage = 1;
+
+    // Pagination logic
+    function paginate(page) {
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+        rows.forEach((row, index) => {
+            row.style.display = (index >= start && index < end) ? '' : 'none';
+        });
+    }
+
+    function updatePagination() {
+        const prev = document.querySelector('.pagination .prev');
+        const next = document.querySelector('.pagination .next');
+
+        prev.classList.toggle('disabled', currentPage === 1);
+        next.classList.toggle('disabled', currentPage === totalPages);
+    }
+
+    document.querySelector('.pagination .prev').addEventListener('click', function (e) {
+        e.preventDefault();
+        if (currentPage > 1) {
+            currentPage--;
+            paginate(currentPage);
+            updatePagination();
+        }
+    });
+
+    document.querySelector('.pagination .next').addEventListener('click', function (e) {
+        e.preventDefault();
+        if (currentPage < totalPages) {
+            currentPage++;
+            paginate(currentPage);
+            updatePagination();
+        }
+    });
+
+    // Initialize pagination
+    paginate(currentPage);
+    updatePagination();
+</script>
+
+{% endblock %}

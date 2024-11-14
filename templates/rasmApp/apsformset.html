@@ -1,0 +1,30 @@
+{% extends "rasmApp/layout.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+    table {
+        border: 1px solid black;
+    }
+    table tr, td, th {
+        border: 1px solid black;
+    }
+</style>
+
+
+<form method="POST">
+    {% csrf_token %}
+    {{ formset.management_form }}
+    {% for form in formset %}
+    <tr>
+        <td>{{form.erabudget}}</td>
+        <td>{{form.bapmonth}}</td>
+        <td>{{form.actionInBr}}</td>
+        <td>{{form.actionInKm}}</td>
+        <td>{{form.bremark1}}</td>
+        <td>{{form.bremark2}}</td>
+    </tr>
+    {% endfor %}
+    <input type="submit">Save</input> 
+</form>
+{% endblock %}

@@ -1,0 +1,175 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<style>
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      background-color: #f9f9f9;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    th, td {
+      padding: 18px !important;
+      vertical-align: middle;
+      border: none; /* Removed borders */
+    }
+  
+    th {
+      background-color: #F0F0F0;
+      color: #333;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  
+    td {
+      background-color: #FFF;
+      color: #333;
+    }
+  
+    tr:nth-child(even) td {
+      background-color: #F7F7F7; /* Alternating row background */
+    }
+  
+    tr:hover td {
+      background-color: #eaeaea; /* Hover effect */
+    }
+  
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      th, td {
+        padding: 8px;
+        font-size: 14px;
+      }
+    }
+
+    /* Pagination styles */
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .pagination-button {
+      margin: 0 5px;
+      padding: 5px 10px;
+      background-color: #f0f0f0;
+      border: 1px solid #ddd;
+      cursor: pointer;
+    }
+
+    .pagination-button:hover {
+      background-color: #e0e0e0;
+    }
+
+    .pagination-info {
+      margin: 0 10px;
+    }
+  </style>
+  
+<br>
+<div class="container">
+<table class="table" id="dataTable">
+    <thead class="table-light">
+        <tr><th colspan="13" style="text-align: center; vertical-align:middle">የሰባት ወራት ዕቅድ ክንውን ማነጻጸሪያ - በእያንዳንዱ ፕሮጀክት</th></tr>
+        <tr>
+            <th rowspan="2" style="text-align: center; vertical-align:middle">የፕሮጀክቱ ስም</th>
+            <th colspan="6" style="text-align: center; vertical-align:middle">ፋይናንሺያል</th>
+            <th colspan="6" style="text-align: center; vertical-align:middle">ፊዚካል</th>
+        </tr>
+        <tr>
+        <th>የጥር ወር ዕቅድ  (ብር)</th>
+        <th>የጥር ወር ክንውን  (ብር)</th>
+        <th>የወሩ ንጽጽር (%)</th>
+        <th>የ7 ወራት ዕቅድ</th>
+        <th>የ7 ወራት ክንውን</th>
+        <th>የ7 ወራት ንጽጽር (%)</th>
+        <th>የጥር ወር ዕቅድ  (ኪ.ሜ)</th>
+        <th>የጥር ወር ክንውን  (ኪ.ሜ)</th>
+        <th>የወሩ ንጽጽር (%)</th>
+        <th>የ7 ወራት ዕቅድ</th>
+        <th>የ7 ወራት ክንውን</th>
+        <th>የ7 ወራት ንጽጽር (%)</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for item, item2 in zipsevnth %}
+    <tr>
+        <td>{{item.erabudget__bprojectname}}</td>
+        <td>{{item.budgetedap__bapinBr|floatformat:2|intcomma}}</td>
+        <td>{{item.actionInBr|floatformat:2|intcomma}}</td>
+        <td>{{item.compf|floatformat:2|intcomma }}</td>
+        <td>{{item2.aptotalbr|floatformat:2|intcomma }}</td>
+        <td>{{item2.acomptotalbr|floatformat:2|intcomma }}</td>
+        <td>{{item2.fincomp|floatformat:2|intcomma }}</td>
+        <td>{{item.budgetedap__bapinKm|floatformat:2|intcomma }}</td>
+        <td>{{item.actionInKm|floatformat:2|intcomma }}</td>
+        <td>{{item.compl|floatformat:2|intcomma }}</td>
+        <td>{{item2.aptotalkm|floatformat:2|intcomma }}</td>
+        <td>{{item2.acomptotalkm|floatformat:2|intcomma }}</td>
+        <td>{{item2.phycomp|floatformat:2|intcomma }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div class="pagination-container">
+    <button id="prevButton" class="pagination-button">Previous</button>
+    <span id="paginationInfo" class="pagination-info"></span>
+    <button id="nextButton" class="pagination-button">Next</button>
+</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const table = document.getElementById('dataTable');
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    const prevButton = document.getElementById('prevButton');
+    const nextButton = document.getElementById('nextButton');
+    const paginationInfo = document.getElementById('paginationInfo');
+
+    const rowsPerPage = 10;
+    let currentPage = 1;
+    const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+    function showPage(page) {
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+
+        rows.forEach((row, index) => {
+            row.style.display = (index >= start && index < end) ? '' : 'none';
+        });
+
+        paginationInfo.textContent = `Page ${page} of ${totalPages}`;
+        prevButton.disabled = page === 1;
+        nextButton.disabled = page === totalPages;
+    }
+
+    prevButton.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            showPage(currentPage);
+        }
+    });
+
+    nextButton.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            showPage(currentPage);
+        }
+    });
+
+    showPage(currentPage);
+});
+</script>
+{% endblock %}

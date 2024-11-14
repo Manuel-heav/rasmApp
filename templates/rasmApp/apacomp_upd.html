@@ -1,0 +1,88 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+<br>
+<div class="container">
+<h5 style="color: #F67007; font-weight:bold;">የ2017 በጀት ዓመት የፕሮጀክቶች ክንውን መመዝገቢያ</h5>
+</div>
+<div class="container">
+<center>
+<form >
+    <select name="workt">
+        <option selected disabled=true>--Select Work Type--</option>
+        <option>መደበኛ ጥገና</option>
+        <option>ወቅታዊ ጥገና</option>
+        <option>ከባድ ጥገና</option>
+        <option>በአፈፃፀም ላይ የተመሰረተ መንገድ ጥገና (OPRC)</option>
+        <option>ኦቨርሌይ እና በአፈፃፀም ላይ የተመሰረተ መንገድ ጥገና</option>
+        <option>ኦቨርሌይ</option>
+        <option>የመሬት መንሸራተት እና ጎርፍ መከላከል ስራ</option>
+        <option>የመንገድ ደህንነት ስራ</option>
+        <option>የሚዛን ጣቢያ ስራዎች</option>
+        <option>የሚዛን ጣቢያ የማዘመን ስራዎች</option>
+        <option>የማማከር አገልግሎት</option>
+        <option>የከተማ አስፋልት መንገድ ማስፋት</option>
+        <option>የከተማ የአስፋልት ማልበስ ስራ (PTS)</option>
+        <option>የካሳ ክፍያ</option>
+        <option>ድልድይ መልሶ ግንባታ</option>
+        <option>ድልድይ/ፉካ ጥገና ስራ</option>
+        <option>ድንገተኛ ስራዎች</option>
+        <option>ኤርጎኖሚክስ</option>
+    </select>
+    <select name="months">
+        <option selected disabled=true>--Select Month--</option>
+        <option>ሐምሌ</option>
+        <option>ነሃሴ</option>
+        <option>መስከረም</option>
+        <option>ጥቅምት</option>
+    </select>
+    <input type="submit" value="Search">
+</form>
+</center>
+<div>
+</div>
+<table class="table table-light">
+    <form method="post" action="{% url 'apacomp_upd' %}">
+    {% csrf_token %}
+    <tr>
+    <thead class="table-light">
+        <th style="vertical-align : middle;text-align:center;">የፕሮጀክቱ ስም</th>
+        <th style="vertical-align : middle;text-align:center;">ወር</th>
+        <th style="vertical-align : middle;text-align:center;">ፋይናንሽያል</th>
+        <th style="vertical-align : middle;text-align:center;">ፊዚካል</th>
+        <th style="vertical-align : middle;text-align:center;">መለኪያ | ዩኒት</th>
+        <th style="vertical-align : middle;text-align:center;">በጦርነቱ/በፀጥታ ችግር ምክንያት</th>
+        <th style="vertical-align : middle;text-align:center;">በኮንትራት የሚተዳደሩ ፕሮጀክቶች በመቋረጣቸው ምክንያት</th>
+        <th style="vertical-align : middle;text-align:center;">በግዢ ሂደት ላይ ያሉ ፕሮጀክቶች</th>
+        <th style="vertical-align : middle;text-align:center;">በግብአት እጥረት ምክንያት</th>
+        <th style="vertical-align : middle;text-align:center;">በመንገድ ወሰን ማስከበር ምክንያት</th>
+        <th style="vertical-align : middle;text-align:center;">የተለያየ (Others)</th>
+    </thead>
+    </tr>
+    {% for i in apacomp %}
+        <tr scope="row"">
+            {% if form.instance.id == i.id %}
+            {% include 'rasmApp/save_apacomp.html' %}
+            {% else %}
+            <td> {{ i.erabudget }}</td> 
+            <td>{{ i.bapmonth }}</td>
+            <td>{{ i.actionInBr }}</td>
+            <td>{{ i.actionInKm }}</td>
+            <td>{{ i.unit }}</td>
+            <td>{{ i.securityproblem }}</td>
+            <td>{{ i.duetocontracttermination }}</td>
+            <td>{{ i.underprocurementprocess }}</td>
+            <td>{{ i.resourceshortages }}</td>
+            <td>{{ i.rightofwayissues }}</td>
+            <td>{{ i.other }}</td>
+            <td><button formnovalidate class="btn btn-success" name='edit' value = "{{ i.id }}">Edit</button></td>
+            <!-- <td><button formnovalidate class="btn btn-danger" name='delete' value = "{{ i.id }}">Delete</button></td>-->
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </form>
+</table>
+<a href = "{% url 'home' %}"> Go home </a>
+</div>
+{% endblock %}

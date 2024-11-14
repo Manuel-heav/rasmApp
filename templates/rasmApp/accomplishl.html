@@ -1,0 +1,36 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+<br>
+<h3 style="color: #F67007; font-weight:bold;">የ2017 በጀት ዓመት ዕቅድ ዝርዝር | Action Plan List</h3>
+<hr><hr>
+<div class="container">
+    <h5 style="color: #F67007; font-weight:bold;">{{l}}</h5>
+    <table class="table table-sm">
+        <thead class="table-light">
+            <tr>
+                <th>የፕሮጀክቱ ስም</th>
+                <th>ሮድ ሴግመንት</th>
+                <th>ፋይናንሺያል</th>
+                <th>ፊዚካል</th>
+                <th>ምክንያት</th>
+                <th>አስተያየት</th>
+            </tr>
+        </thead>
+        {% for field in acomp %}
+        <tr>
+            <td> {{ field.budgetedap }}</td> 
+            <td> {{ field.erabudget.broadsegment }}</td> 
+            <td>{{ field.actionInBr }}</td>
+            <td>{{ field.actionInKm }}</td>
+            <td>{{ field.bremark1 }}</td>
+            <td>{{ field.bremark2 }}</td>
+           <!-- <td><a class="btn btn-outline-danger btn-sm btn-block" href="{% url 'accomplish' field.id %}">ክንውን</a></td>-->
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</form>
+
+{% endblock %}

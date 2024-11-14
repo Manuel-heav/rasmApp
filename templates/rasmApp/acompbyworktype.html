@@ -1,0 +1,80 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+<br><br>
+
+<style>
+    .container {
+        width: 100%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f8f9fa;
+        color: #333;
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    td {
+        border-bottom: 1px solid #ddd;
+    }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+</style>
+
+<div class="container">
+    <table>
+        <thead>
+            <tr>
+                <th>የሥራው ዓይነት</th>
+                <th>ሐምሌ</th>
+                <th>ነሃሴ</th>
+                <th>መስከረም</th>
+                <th>ጥቅምት</th>
+                <th>ህዳር</th>
+                <th>ታህሳስ</th>
+                <th>ጥር</th>
+                <th>የካቲት</th>
+                <th>መጋቢት</th>
+                <th>ሚያዚያ</th>
+                <th>ግንቦት</th>
+                <th>ሰኔ</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in aps_pivot %} 
+            <tr>
+                {% for value in row.values %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

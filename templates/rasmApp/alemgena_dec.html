@@ -1,0 +1,57 @@
+{% extends "rasmApp/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <h3 style="background-color: #F67007; color: black; text-align:center;">አለምገና ቅ/ጽ/ቤት | Alemgena District</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                <a href = "{% url 'alemgena' %}?d=አለምገና" class="btn btn-outline-primary btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ፕሮጀክት</a><br/><br/>
+                </div>
+                <div  class="col-md-3">
+                <a href = "{% url 'bapalemgena' %}?d=አለምገና" class="btn btn-outline-primary btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ዕቅድ</a><br/><br/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                <a href = "#" class="btn btn-outline-primary btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ክንውን</a><br/><br/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <a href = "{% url 'accomplishl_dec' %}?d=አለምገና&m=ታህሳስ&wt=መደበኛ ጥገና" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">መደበኛ ጥገና</a><br>
+                    <a href = "{% url 'accomplishl_dec' %}?d=አለምገና&m=ታህሳስ&wt=ወቅታዊ ጥገና" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ወቅታዊ ጥገና</a><br>
+                    <a href = "{% url 'accomplishl_dec' %}?d=አለምገና&m=ታህሳስ&wt=ከባድ ጥገና" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ከባድ ጥገና</a><br>
+                    <a href = "{% url 'accomplishl_dec' %}?d=አለምገና&m=ታህሳስ&wt=በአፈፃፀም ላይ የተመሰረተ መንገድ ጥገና (OPRC)" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">በአፈፃፀም ላይ የተመሰረተ መንገድ ጥገና (OPRC)</a><br>
+                    <a href = "{% url 'accomplishl_dec' %}?d=አለምገና&m=ታህሳስ&wt=ኦቨርሌይ" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ኦቨርሌይ</a><br>
+                    <a href = "{% url 'accomplishl_dec' %}?d=አለምገና&m=ታህሳስ&wt=ኦቨርሌይ እና በአፈፃፀም ላይ የተመሰረተ መንገድ ጥገና" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ኦቨርሌይ እና በአፈፃፀም ላይ የተመሰረተ መንገድ ጥገና</a><br>
+                    <a href = "{% url 'accomplishl_dec' %}?d=አለምገና&m=ታህሳስ&wt=የመሬት መንሸራተት እና ጎርፍ መከላከል ስራ" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">የመሬት መንሸራተት እና ጎርፍ መከላከል ስራ</a><br>
+                    <a href = "{% url 'accomplishl_dec' %}?d=አለምገና&m=ታህሳስ&wt=የከተማ አስፋልት መንገድ ማስፋት" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">የከተማ አስፋልት መንገድ ማስፋት</a><br>
+                </div>
+                <div class="col-md-3">
+                    <a href = "{% url 'accomplishl_dec' %}?d=አለምገና&m=ታህሳስ&wt=የከተማ የአስፋልት ማልበስ ስራ (PTS)" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">የከተማ የአስፋልት ማልበስ ስራ (PTS)</a><br>
+                    <a href = "{% url 'accomplishl_dec' %}?d=አለምገና&m=ታህሳስ&wt=ድልድይ መልሶ ግንባታ" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ድልድይ መልሶ ግንባታ</a><br>
+                    <a href = "{% url 'accomplishl_dec' %}?d=አለምገና&m=ታህሳስ&wt=ድልድይ/ፉካ ጥገና ስራ" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ድልድይ/ፉካ ጥገና ስራ</a><br>
+                    <a href = "{% url 'accomplishl_dec' %}?d=አለምገና&m=ታህሳስ&wt=ድንገተኛ ስራዎች" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ድንገተኛ ስራዎች</a><br>
+                    <a href = "{% url 'accomplishl_dec' %}?d=አለምገና&m=ታህሳስ&wt=የመንገድ ደህንነት ስራ" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">የመንገድ ደህንነት ስራ</a><br>
+                    <a href = "{% url 'accomplishl_dec' %}?d=አለምገና&m=ታህሳስ&wt=የማማከር አገልግሎት" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">የማማከር አገልግሎት</a><br>
+                    <a href = "{% url 'accomplishl_dec' %}?d=አለምገና&m=ታህሳስ&wt=የሚዛን ጣቢያ ስራዎች" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">የሚዛን ጣቢያ ስራዎች</a><br>
+                    <a href = "{% url 'accomplishl_dec' %}?d=አለምገና&m=ታህሳስ&wt=የሚዛን ጣቢያ የማዘመን ስራዎች" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">የሚዛን ጣቢያ የማዘመን ስራዎች</a><br>
+                    <a href = "{% url 'accomplishl_dec' %}?d=አለምገና&m=ታህሳስ&wt=የካሳ ክፍያ" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">የካሳ ክፍያ</a><br>
+                    <a href = "{% url 'accomplishl_dec' %}?d=አለምገና&m=ታህሳስ&wt=ኤርጎኖሚክስ" class="btn btn-outline-danger btn-sm btn-block" style="width:100%" tabindex="-1" role="button">ኤርጎኖሚክስ</a><br>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <img src="{% static '/images/ERA-HomePage-Pic.png' %}" alt="Federal Road Network Mapping" style="display: block; margin-left: auto; margin-right: auto; width: 100%;">
+        </div>
+    </div>
+</div>
+{% endblock %}
+

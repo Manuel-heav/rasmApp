@@ -1,0 +1,55 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+
+<table class="table table-light">
+    <form method="post" action="{% url 'roadconditionsurvey' %}">
+    {% csrf_token %}
+    <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Inspector</th>
+        <th scope="col">District</th>
+        <th scope="col">Area</th>
+        <th scope="col">Road Segment</th>
+        <th scope="col">Km Start</th>
+        <th scope="col">Km Count</th>
+        <th scope="col">Range</th>
+        <th scope="col">Problem</th>
+        <th scope="col">Severity</th>
+        <th scope="col">Extent</th>
+        <th scope="col">Activity</th>
+        <th scope="col">Qty</th>
+        
+        <th colspan="2">Action</th>
+    </tr>
+    {% if not form.instance.id %}
+    <tr>
+        {% include 'rasmApp/roadconditionsurveysave.html' %}
+    </tr>
+    {% endif %}
+    {% for i in condsurvey %}
+        <tr scope="row"">
+            {% if form.instance.id == i.id %}
+            {% include 'rasmApp/roadconditionsurveysave.html' %}
+            {% else %}
+            <td> {{ i.surveyDate }}</td> 
+            <td> {{ i.inspector }}</td> 
+            <td> {{ i.district }}</td> 
+            <td> {{ i.area }}</td> 
+            <td> {{ i.segmentNo }}</td> 
+            <td> {{ i.startKm }}</td> 
+            <td> {{ i.kmCount }}</td> 
+            <td> {{ i.range }}</td> 
+            <td> {{ i.problem }}</td> 
+            <td> {{ i.severity }}</td> 
+            <td> {{ i.extent }}</td> 
+            <td> {{ i.activity }}</td> 
+            <td> {{ i.qty }}</td> 
+            <td><button formnovalidate class="btn btn-success" name='edit' value = "{{ i.id }}">Edit</button></td>
+            <td><button formnovalidate class="btn btn-danger" name='delete' value = "{{ i.id }}">Delete</button></td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </form>
+</table>
+{% endblock %}

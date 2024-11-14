@@ -1,0 +1,20 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+
+<h3>Work Type</h3>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Please select format of file.</p>
+    <select name="file-format" class="form-control my-3">
+        <option selected>Choose work type...</option>
+        <option>CSV</option>
+        <option>JSON</option>
+        <option>XLS (Excel)</option>
+      </select>
+    <button class="btn btn-primary" type="submit">Export</button>
+  </form>
+  <a href="{% url 'home' %}">Return Home View</a>
+  {% endblock %} 

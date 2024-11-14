@@ -1,0 +1,134 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style>
+    .custom-container {
+        padding: 20px;
+        background-color: #f3f3f3;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .form-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .report-card {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .report-title {
+        font-size: 2rem;
+        margin-bottom: 15px;
+        color: #F67007;
+        text-align: center;
+    }
+
+    .details-box {
+        background-color: #F9F9F9;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .project-detail {
+        font-size: 1rem;
+        color: #333;
+        line-height: 1.8;
+        margin-bottom: 10px;
+    }
+
+    .project-info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .project-info-item {
+        background-color: #F9F9F9;
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 1rem;
+        color: #333;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-label {
+        font-weight: bold;
+        color: #F67007;
+        margin-right: 5px;
+    }
+
+    .custom-submit-btn {
+        display: block;
+        width: 100%;
+        padding: 10px 15px;
+        background-color: #F67007;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .custom-submit-btn:hover {
+        background-color: #d85c05;
+    }
+
+</style>
+<br>
+
+<div class="custom-container">
+    <div class="form-wrapper">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ formset.management_form }}
+
+            <div class="report-card">
+                <h5 class="report-title">ክንውን | Summary Report</h5>
+
+                <div class="details-box">
+                    <p class="project-detail">
+                        የፕሮጀክቱ ስም:&emsp; {{budgetedap.erabudget.bprojectname}} &emsp; 
+                        ኮንትራክተር:&emsp; {{budgetedap.erabudget.bcontractor}}
+                    </p>
+                    <p class="project-detail">
+                        የመንገዱ ዓይነት:&emsp; አስፋልት ፡ {{budgetedap.erabudget.basphalt}} ኪ.ሜ&emsp; 
+                        ጠጠር {{budgetedap.erabudget.bgravel}}&emsp;&emsp; 
+                        በጀት ብር &ensp;{{budgetedap.bapinBr}}&emsp;&emsp; 
+                        በጀት ኪ.ሜ &ensp;{{budgetedap.bapinKm}}&emsp;&emsp; 
+                        ወር &ensp;{{budgetedap.bapmonth}}
+                    </p>
+                </div>
+
+                <div class="project-info">
+                    {% for form in formset %}
+                    <div class="project-info-item">
+                        <span class="info-label">ክንውን (በገንዘብ):</span> {{ form.actionInBr }}
+                    </div>
+                    <div class="project-info-item">
+                        <span class="info-label">ክንውን (በኪ.ሜ):</span> {{ form.actionInKm }}
+                    </div>
+                    <div class="project-info-item">
+                        <span class="info-label">አስተያየት:</span> {{ form.bremark1 }}
+                    </div>
+                    <div class="project-info-item">
+                        <span class="info-label">ተጨማሪ አስተያየት:</span> {{ form.bremark2 }}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <button class="custom-submit-btn" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+
+<h1> Home page </h1>
+<table class="table table-bordered table-striped table-light">
+    <form method="post" action="{% url 'bactionplan' %}">
+    {% csrf_token %}
+    <tr>
+        <th>budgetedap</th><th>actionInBr</th><th>actionInKm</th><th>bremark1</th><th colspan="2">Action</th>
+    </tr>
+    {% if not form.instance.id %}
+    <tr>
+        {% include 'rasmApp/savebactionplan.html' %}
+    </tr>
+    {% endif %}
+    {% for br in aps %}
+        <tr>
+            {% if form.instance.id == br.id %}
+            {% include 'rasmApp/savebactionplan.html' %}
+            {% else %}
+            <td> {{ br.budgetedap }}</td> 
+            <td>{{ br.actionInBr }}</td>
+            <td>{{ br.actionInKm }}</td>
+            <td>{{ br.bremark1 }}</td>
+            <td><button formnovalidate class="btn btn-success" name='edit' value = "{{ br.id }}">Edit</button></td>
+            <td><button formnovalidate class="btn btn-danger" name='delete' value = "{{ br.id }}">Delete</button></td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </form>
+</table>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+<br>
+
+
+<div class="container">
+    <table class="table table-sm">
+        <thead class="table-light">
+        <th>የፕሮጀክቱ ስም</th>
+        <th>አስፋልት</th>
+        <th>ጠጠር</th>
+        <th>የሐምሌ ወር ዕቅድ (ብር)</th>
+        <th>የሐምሌ ወር ክንውን (ብር)</th>
+        <th>የሐምሌ ወር ንጽጽር</th>
+        <th>የሐምሌ ወር ዕቅድ (ኪ.ሜ)</th>
+        <th>የሐምሌ ወር ክንውን (ኪ.ሜ)</th>
+        </thead>
+        {% for item in ppm %}
+        <tr>
+            <td>{{ item.erabudget}}</td>
+            <td>{{ item.erabudget.basphalt}}</td>
+            <td>{{ item.erabudget.bgravel}}</td>
+            <td>{{ item.bapinBr|floatformat:2|intcomma}}</td>
+            <td>{{ item.accomplishment.actionInBr|floatformat:2|intcomma}}</td>
+            <td>{{ item.comp|floatformat:2}}</td>
+            <td>{{ item.bapinKm}}</td>
+            <td>{{ item.accomplishment.actionInKm}}</td>
+        </tr>
+    </table>
+</div>
+{% endblock %}

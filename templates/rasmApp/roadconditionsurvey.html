@@ -1,0 +1,94 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+
+
+<style>
+    .container {
+        background-color: #fff;
+        padding: 20px;
+        margin: 20px auto;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+    }
+    h5 {
+        color: #F67007;
+        font-weight: bold;
+        text-align: center;
+    }
+    hr {
+        border: 0;
+        height: 1px;
+        background: #ddd;
+        margin: 20px 0;
+    }
+    .main {
+        margin-top: 20px;
+    }
+    label{
+        margin: 5px 0;
+    }
+    input{
+        margin: 5px 0;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+    input[type="submit"] {
+        background-color: #F67007;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+    input[type="submit"]:hover {
+        background-color: #e65c00;
+    }
+    .info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .info em, .info b {
+        font-size: 16px;
+    }
+</style>
+
+<table class="table table-light">
+    <form method="post" action="{% url 'roadconditionsurvey' %}">
+    {% csrf_token %}
+    <tr>
+        <th scope="col">Range</th>
+        <th scope="col">Problem</th>
+        <th scope="col">Severity</th>
+        <th scope="col">Extent</th>
+        <th scope="col">Activity_Code</th>
+        <th scope="col">Activity</th>
+        <th scope="col">Qty</th>
+        
+        <th colspan="2">Action</th>
+    </tr>
+    {% for i in condsurvey %}
+        <tr scope="row"">
+            {% if form.instance.id == i.id %}
+            {% include 'rasmApp/roadconditionsurveysave.html' %}
+            {% else %}
+            <td> {{ i.roadsegext }}</td> 
+            <td> {{ i.problem }}</td> 
+            <td> {{ i.severity }}</td> 
+            <td> {{ i.extent }}</td> 
+            <td> {{ i.activity }}</td> 
+            <td> {{ i.activity.activity }}</td> 
+            <td> {{ i.qty }}</td> 
+            <td><button formnovalidate class="btn btn-success" name='edit' value = "{{ i.id }}">Edit</button></td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </form>
+</table>
+{% endblock %}

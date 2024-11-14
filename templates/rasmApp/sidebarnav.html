@@ -1,0 +1,435 @@
+{% load static %}
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+</head>
+<style>
+  .hello-msg {
+    font-size: 18px;
+    color: black;
+    margin-right: 20px;
+  }
+
+  #logo {
+    height: 40px;
+  }
+
+  #logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  #logo-container h1 {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .sidebar {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 250px;
+    background-color: rgb(251, 112, 25);
+    color: white;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 100000;
+    border-right: 2px solid purple;
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+  .sidebar .navbar-nav {
+    flex-direction: column;
+  }
+
+  .sidebar .navbar-nav .nav-item {
+    margin-bottom: 10px;
+  }
+
+  .sidebar .navbar-nav .dropdown-menu {
+    width: 100%;
+  }
+
+  .navbar {
+    display: flex;
+    flex-direction: column;
+  }
+
+  a {
+    color: white;
+  }
+
+  h5 {
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .sidebar-cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .nav-link{
+    font-size: 18px;
+  }
+
+  .nav-link:hover{
+    background-color: rgb(230, 92, 15);
+  }
+
+  #sidemenu {
+    display: none;
+    flex-direction: column;
+  }
+
+  #sidemenu.show {
+    display: flex;
+    transition: display 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
+  }
+
+  .collapse:not(.show) {
+    display: none !important;
+    opacity: 0;
+  }
+
+  .dropdown-toggle::after {
+    display: inline-block;
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-left: 0.3em solid transparent;
+    transition: transform 0.3s ease;
+  }
+
+  .dropdown-toggle[aria-expanded="true"]::after {
+    transform: rotate(180deg);
+  }
+
+  .nav-item {
+    margin-left: 10px;
+  }
+
+  .sidebar .nav-link {
+    color: white;
+  }
+
+  .sidebar h1,
+  .sidebar .nav-item a,
+  .sidebar span {
+    color: white;
+  }
+
+  #sidemenu .nav-link {
+    color: white;
+  }
+
+  .nav-footer{
+    margin-top: 200px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* custom scrollbar */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
+}
+</style>
+
+<div>
+  <nav>
+    <div class="container-fluid sidebar-cont">
+      <a href="/" style="text-decoration: none;">
+      <div id="logo-container">
+        <img src="{% static '/images/mainlogo.png' %}" alt="Federal Road Network Mapping" id="logo">
+        <h1>ERA RAM</h1>
+      </div>
+    </a>
+      <div class="d-flex flex-column justify-content-between col-auto" style="height: 70vh; margin-left: -20px">
+        <div>
+          <ul class="nav nav-pills flex-column mt-2 mt-sm-0" id="menu">
+            <li class="nav-item">
+              <a href="{% url 'home' %}" class="nav-link" aria-current="page"></a>
+            </li>
+            <li class="nav-item">
+              <a href="#planningMenu" data-bs-toggle="collapse" class="nav-link dropdown-toggle" aria-expanded="false">Planning</a>
+              <ul class="nav collapse flex-column ms-1" id="planningMenu" data-bs-parent="#menu">
+                <li class="nav-item">
+                  <a href="{% url 'budget_list' %}" class="nav-link">Road Network Considered For Planning</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'roadconditionsurvey' %}" class="nav-link">Visual Road Conditions Survey</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'road_condition_survey_list' %}" class="nav-link">Strip Map</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'bpprojectname' %}" class="nav-link">BOQ</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'roadconditionsummary' %}" class="nav-link">Need-Based Budget</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'financerpercontractor' %}" class="nav-link">Capacity Based Budget</a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <!-- <li class="nav-item">
+                  <a href="{% url 'appprojectpmonth' %}" class="nav-link">Action Plan/Project/Month</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'aplist' %}" class="nav-link">Budget/Project/Month</a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li class="nav-item">
+                  <a href="{% url 'budgetexport' %}" class="nav-link">Budget Export</a>
+                </li> -->
+              </ul>
+            </li>
+
+
+
+
+
+            <li class="nav-item">
+              <a href="#monitoringMenu" data-bs-toggle="collapse" class="nav-link dropdown-toggle" aria-expanded="false">Monitoring</a>
+              <ul class="nav collapse flex-column ms-1" id="monitoringMenu" data-bs-parent="#menu">
+                <li class="nav-item">
+                  <a href="{% url 'adminaccomplish' %}" class="nav-link">Data Entry</a>
+                  <ul class="nav collapse flex-column ms-1" id="dataEntryMenu" data-bs-parent="#monitoringMenu">
+                    <li class="nav-item">
+                      <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'adminaccomplish' %}" class="nav-link">Accomplishment</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="#" class="nav-link">Accomplishment List</a>
+                    </li>
+                  </ul>
+                </li>
+            
+                <li class="nav-item">
+                  <a href="#reportMenu" data-bs-toggle="collapse" class="nav-link dropdown-toggle" aria-expanded="false">Report</a>
+                  <ul class="nav collapse flex-column ms-1" id="reportMenu" data-bs-parent="#monitoringMenu">
+                    <li class="nav-item">
+                      <a href="#monthlyMenu" data-bs-toggle="collapse" class="nav-link dropdown-toggle" aria-expanded="false">Monthly</a>
+                      <ul class="nav collapse flex-column ms-1" id="monthlyMenu" data-bs-parent="#reportMenu">
+                        <li class="nav-item">
+                          <a href="{% url 'disapwithaccomp_comparison' %}" class="nav-link">Branch Office Summary</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="{% url 'owndisapwithaccomp_comparison' %}" class="nav-link">Own Force Branch Office Summary</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="{% url 'contractor_apacmop_comparison' %}" class="nav-link">Contractor Summary</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="{% url 'intervention_apacmop_comparison' %}" class="nav-link">Intervention Summary</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'fin_maintenance_summary' %}">By Financer</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link"  href="{% url 'apwithaccomp_comparison' %}">By Project</a>
+                        </li>
+                      </ul>
+                    </li>
+            
+                    <li class="nav-item">
+                      <a href="#quarterlyMenu" data-bs-toggle="collapse" class="nav-link dropdown-toggle" aria-expanded="false">Quarterly</a>
+                      <ul class="nav collapse flex-column ms-1" id="quarterlyMenu" data-bs-parent="#reportMenu">
+                        <li class="nav-item">
+                          <a href="{% url 'quarterly_branchoffice' %}" class="nav-link">Branch Office Summary</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="{% url 'quarterly_ownbranch' %}" class="nav-link">Own Force Branch Office Summary</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="{% url 'quarterly_contractor' %}" class="nav-link">Contractor Summary</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="{% url 'quarterly_intervention' %}" class="nav-link">Intervention Summary</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'fin_maintenance_summary'  %}">By Financer</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'quarterly_byproject' %}">By Project</a>
+                        </li>
+                      </ul>
+                    </li>
+            
+                    <li class="nav-item">
+                      <a href="#annuallyMenu" data-bs-toggle="collapse" class="nav-link dropdown-toggle" aria-expanded="false">Annually</a>
+                      <ul class="nav collapse flex-column ms-1" id="annuallyMenu" data-bs-parent="#reportMenu">
+                        <li class="nav-item">
+                          <a href="{% url 'district_apaccomp_compyr' %}" class="nav-link">Branch Office Summary</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="{% url 'ownforce_district_apacompcompyr' %}" class="nav-link">Own Force Branch Office Summary</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="{% url 'contractor_apacompcomp_yr' %}" class="nav-link">Contractor Summary</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="{% url 'intervention_apacompcomp_yr' %}" class="nav-link">Intervention Summary</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'fin_maintenance_summary' %}">By Financer</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'apaccomp_complast' %}">By Project</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            
+
+
+
+
+
+
+            <li class="nav-item">
+              <a href="#MMSmenu" data-bs-toggle="collapse" class="nav-link dropdown-toggle" aria-expanded="false">MMS</a>
+              <ul class="nav collapse flex-column ms-1" id="MMSmenu" data-bs-parent="#menu">
+                <li class="nav-item">
+                  <a href="#" class="nav-link">Action</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">Another action</a>
+                </li>
+              </ul>
+              </li>
+
+              <li class="nav-item">
+                <a href="#PMSMenu" data-bs-toggle="collapse" class="nav-link dropdown-toggle" aria-expanded="false">PMS</a>
+                <ul class="nav collapse flex-column ms-1" id="PMSMenu" data-bs-parent="#menu">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">Action</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">Another action</a>
+                  </li>
+                </ul>
+                </li>
+
+                <li class="nav-item">
+                  <a href="#BMSMenu" data-bs-toggle="collapse" class="nav-link dropdown-toggle" aria-expanded="false">BMS</a>
+                  <ul class="nav collapse flex-column ms-1" id="BMSMenu" data-bs-parent="#menu">
+                    <li class="nav-item">
+                      <a href="#" class="nav-link">Action</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="#" class="nav-link">Another action</a>
+                    </li>
+                  </ul>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="#AxMenu" data-bs-toggle="collapse" class="nav-link dropdown-toggle" aria-expanded="false">AxMS</a>
+                    <ul class="nav collapse flex-column ms-1" id="AxMenu" data-bs-parent="#menu">
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">Action</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">Another action</a>
+                      </li>
+                    </ul>
+                    </li>
+
+                    <li class="nav-item">
+                      <a href="#TMSMenu" data-bs-toggle="collapse" class="nav-link dropdown-toggle" aria-expanded="false">TMS</a>
+                      <ul class="nav collapse flex-column ms-1" id="TMSMenu" data-bs-parent="#menu">
+                        <li class="nav-item">
+                          <a href="#" class="nav-link">Action</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#" class="nav-link">Another action</a>
+                        </li>
+                      </ul>
+                      </li>
+
+                      <li class="nav-item">
+                        <a href="#SMSMenu" data-bs-toggle="collapse" class="nav-link dropdown-toggle" aria-expanded="false">SMS</a>
+                        <ul class="nav collapse flex-column ms-1" id="SMSMenu" data-bs-parent="#menu">
+                          <li class="nav-item">
+                            <a href="#" class="nav-link">Action</a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="#" class="nav-link">Another action</a>
+                          </li>
+                        </ul>
+                        </li>
+
+                        <li class="nav-item">
+                          <a href="#othersMenu" data-bs-toggle="collapse" class="nav-link dropdown-toggle" aria-expanded="false">Others</a>
+                          <ul class="nav collapse flex-column ms-1" id="othersMenu" data-bs-parent="#menu">
+                            <li class="nav-item">
+                              <a href="#" class="nav-link">Action</a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="#" class="nav-link">Another action</a>
+                            </li>
+                          </ul>
+                          </li>
+              <div class="nav-footer">
+                <span class="hello-msg">Hello, {{ request.user.username }}</span>
+                <div>
+                    <span><a href="{% url 'logout' %}">
+                        Logout</a>
+                    </span>
+                    <i class="bi bi-box-arrow-left"></i>
+                </div>
+              </div>
+            </div>  
+        </div>
+    </div>
+    
+  </nav>
+</div>
+
+<div class="content">
+  {% block content %}
+  <!-- Main content will go here -->
+  {% endblock %}
+</div>
+
+<script>
+  const current = 0;
+  for (var i = 0; i < document.links.length; i++) {
+    if (document.links[i].href === document.URL) {
+      current = i;
+    }
+  }
+  document.links[current].className = 'current';
+</script>

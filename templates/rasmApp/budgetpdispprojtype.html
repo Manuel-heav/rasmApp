@@ -1,0 +1,110 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<head>
+    <title>Budget Table</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            transition: background-color 0.3s ease; /* Smooth background transition */
+        }
+
+        .container {
+            background-color: #ffffff; /* White background for the container */
+            border-radius: 10px; /* Slightly rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Deeper shadow */
+            padding: 30px; /* More padding for a spacious feel */
+            margin: 20px 0;
+            transition: box-shadow 0.3s ease; /* Shadow transition */
+        }
+
+        h5 {
+            color: #F67007; /* Orange color */
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px; /* Increased font size for better visibility */
+        }
+
+        table {
+            border: none;
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th {
+            background-color: #F67007 !important; /* Orange header */
+            color: white !important;
+            padding: 15px !important; /* Increased padding for comfort */
+            text-align: left;
+            border-bottom: 3px solid #ddd; /* Thicker bottom border */
+            transition: background-color 0.3s ease; /* Smooth transition for hover */
+            border: none
+        }
+
+        td {
+            background-color: #f9f9f9; /* Light gray for table cells */
+            padding: 15px; /* Increased padding for comfort */
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s ease; /* Smooth transition */
+            border: none
+
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f2f2f2; /* Alternate row color */
+        }
+
+        tr:hover td {
+            background-color: #F67007; /* Orange on hover */
+            color: white; /* Change text color to white on hover */
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        tr:hover th {
+            background-color: #F67007; /* Keep header orange on row hover */
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            th, td {
+                font-size: 14px; /* Smaller text for mobile */
+                padding: 10px; /* Adjusted padding for smaller screens */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h5>ለቅ/ጽ/ቤቶች የተያዘ በጀት ከፕሮጀክቶች ዓይነት አንጻር</h5>
+        <table class="table">
+            <thead class="table-light">
+                <tr>
+                    <th>ቅ/ጽ/ቤት</th>
+                    <th>ሌሎች</th>
+                    <th>መንገድ</th>
+                    <th>የማማከር አገልግሎት</th>
+                    <th>ድልድይ</th>
+                    <th>ድምር</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in budgetlist_pivot %}
+                    <tr>
+                        {% for value in row.values %}
+                            <td>{{value}}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "rasmApp/layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {{ formset.management_form }}
+    <h1>አክሽን ፕላን | Action Plan </h1>
+    <table class="table table-sm table-dark table-striped">
+        <tr>
+            <th>ወር</th>
+            <th>ዕቅድ (በገንዘብ)</th>
+            <th>ዕቅድ (በኪ.ሜ)</th>
+        </tr>
+        {% for form in formset %}
+        <tr>
+            <td>{{form.forTheMonth}}</td>
+            <td>{{form.actionPlanInBr}}</td>
+            <td>{{form.actionPlanInKm}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

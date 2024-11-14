@@ -1,0 +1,73 @@
+{% extends "rasmApp/layout.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+    table {
+        border: 1px solid black;
+    }
+    table tr, td, th {
+        border: 1px solid black;
+    }
+</style>
+
+<h3 style="background-color: #F67007; color: white; text-align:center;">አክሽን ፕላን ዝርዝር 2017 ዓ.ም | Action Plan List 2024/25</h3>
+<br/>
+<form style="overflow: hidden; float: right;clear: both;">
+    <label for="html">Search by District or Month </label>
+    <input type="text" name="q">
+    <button> Search </button>
+</form>
+<br/><br/>
+
+<table class="table table-light table-striped table-bordered" border='2' style='border-collapse:collapse'>
+    <thead>
+        <tr>
+            <th>ተራ.ቁ</th>
+            <th>ቅ/ቢሮ</th>
+            <th>ፕሮጀክት</th>
+            <th>የፕሮጀክት ስም</th>
+            <th>የስራው ዓይነት</th>
+            <th>ክልል</th>
+            <th>ተቋራጭ</th>
+            <th>የተቋራጭ ስም</th>
+            <th>የአማካሪ ስም</th>
+            <th>ሮድ ሴግመንት</th>
+            <th>ወር</th>
+            <th>ዕቅድ በብር</th>
+            <th>ዕቅድ በኪ.ሜ</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ap in page_obj.object_list %}
+        <tr>
+            <td>{{ ap.id }}</td>
+            <td>{{ ap.erabudget.bdistrict }}</td>
+            <td>{{ ap.erabudget.bproject }}</td>
+            <td>{{ ap.erabudget.bprojectname }}</td>
+            <td>{{ ap.erabudget.bworktype }}</td>
+            <td>{{ ap.erabudget.bregions }}</td>
+            <td>{{ ap.erabudget.bcontractor }}</td>
+            <td>{{ ap.erabudget.bcontractorname }}</td>
+            <td>{{ ap.erabudget.bconsultant }}</td>
+            <td>{{ ap.erabudget.broadsegment }}</td>
+            <td>{{ ap.bapmonth }}</td>
+            <td>{{ ap.bapinBr }}</td>
+            <td>{{ ap.bapinKm }}</td>
+            <td><a class="btn btn-sm" style="background-color: #F67007; color: white;" href="{% url 'create_apsummary' ap.id %}">ክንውን</a></td>
+        </tr>
+        {% endfor %}
+
+        <center>
+            {%if page_obj.has_previous %} {# whether the previous page exists #}
+                <a href="?page={{page_obj.previous_page_number}}">previous<</a> {# link to the prev page #}
+            {% endif %}
+            <span>{{page_obj.number}}</span> {# the current page number #}
+           
+            {%if page_obj.has_next %} {# whether the next page exists #}
+                <a href="?page={{page_obj.next_page_number}}">next></a> {# link to the next page #}
+            {% endif %}
+        </center>
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+<br>
+<div class="container">
+    <h5 style="color: #F67007; font-weight:bold;">በጀት በሥራው ዓይነት</h5>
+    <hr>
+    <table class="table table-bordered" style="width: 80%;">
+        <thead class="table-light">
+            <tr>
+                <th rowspan="2" style="vertical-align : middle;text-align:center;">የሥራው ዓይነት</th>
+                <th colspan="2" style="vertical-align : middle;text-align:center;">ፋይናንሽያል</th>
+                <th colspan="2" style="vertical-align : middle;text-align:center;">ፊዚካል</th>
+            </tr>
+            <tr>
+                <th style="vertical-align : middle;text-align:center;">ጠቅላላ ዕቅድ</th>
+                <th style="vertical-align : middle;text-align:center;">ጠቅላላ ክንውን</th>
+                <th style="vertical-align : middle;text-align:center;">ጠቅላላ ዕቅድ</th>
+                <th style="vertical-align : middle;text-align:center;">ጠቅላላ ክንውን</th>
+            </tr>
+        </thead>
+        {% for item in grouped_data %}
+        <tr>
+            <td>{{ item.erabudget__bworktype__maintenancetype }}</td> 
+            <td style="text-align: right;">{{ item.APtotalBr|floatformat:2|intcomma }}</td> 
+            <td style="text-align: right;">{{ item.AcomptotalBr|floatformat:2|intcomma }}</td> 
+            <td style="text-align: right;">{{ item.APtotalKm|floatformat:2|intcomma }}</td>
+            <td style="text-align: right;">{{ item.AcomptotalKm|floatformat:2|intcomma }}</td>
+        </tr>
+        {% endfor %}
+        <tr class="tr-light" style="text-align:right; style="background-color:#F67007" color: white;"><td>ድምር</td>
+            <td>{{ total_sum1|floatformat:2|intcomma }}</td>
+            <td>{{ total_sum3|floatformat:2|intcomma }}</td>
+            <td>{{ total_sum2|floatformat:2|intcomma }}</td>
+            <td>{{ total_sum4|floatformat:2|intcomma }}</td>
+        </tr>
+    </table>
+</div>
+{% endblock %}

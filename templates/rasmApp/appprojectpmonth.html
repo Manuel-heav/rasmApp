@@ -1,0 +1,31 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+
+<div class="row">
+    <ul>
+    {% for b in erabudget %}
+        {{b.bprojectname}}
+        <ul>
+        <div class="row">
+        {% for budgetedap in b.budgetedap_set.all%}
+                <div class="col">
+                    <div class="row">
+            {{budgetedap.month}}
+                </div>
+                <div class="row">
+            {{budgetedap.bapinBr|floatformat:2|intcomma}}
+                </div>
+                <div class="row">
+            {{budgetedap.bapinKm|floatformat:2}}
+                </div>
+                </div>
+        {% endfor %}
+        </div>
+        </ul>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

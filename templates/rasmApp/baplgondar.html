@@ -1,0 +1,44 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+<br>
+<div class="row">
+    <div class="col-10">
+        <h5 style="color: #F67007; font-weight:bold; ">የ2017 በጀት ዓመት ዕቅድ ዝርዝር | Action Plan List</h5>
+    </div>
+    <!--
+    <div class="col-2">
+        <a class="btn btn-sm" style="background-color: #F67007; color: white;" href="{% url 'gondarl' %}"><i class="fa-arrow-left"></i>በጀት ዝርዝር</a>
+    </div>
+    -->
+</div>
+<hr>
+
+<div class="container">
+    <table class="table table-sm">
+        <thead class="table-light">
+            <tr>
+                <th>ፕሮጀክት</th>
+                <th>ሮድ ሴግመንት</th>
+                <th>ወር</th>
+                <th>ብር</th>
+                <th>ኪ.ሜ</th>
+                <th>አስተያየት</th>
+            </tr>
+        </thead>
+        {% for l in bapgondar %}
+        <tr>
+            <td>{{l.erabudget}}</td>
+            <td>{{l.erabudget.broadsegment}}</td>
+            <td>{{l.month}}</td>
+            <td>{{l.bapinBr|floatformat:2|intcomma}}</td>
+            <td>{{l.bapinKm|floatformat:2}}</td>
+            <td>{{l.remark}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+{% endblock %}

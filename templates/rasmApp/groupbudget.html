@@ -1,0 +1,35 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+
+
+<br><br>
+{{result}}
+<h1>Budget Per District</h1>
+
+...
+
+
+<table class="table">
+    <thead class="table-light">
+        <th>District</th>
+        {% for col in cols %}
+            <th>bproject {{col.0}}</th>
+        {% endfor %}
+    </thead>
+    <tbody>
+        {% for bdistrict, budgets in budgets_transposed_dd.items %}
+        <tr>
+            <td>{{bdistrict}}</td>
+                {% for project in budgets %}
+                <td>{{project.1}}</td>
+                {% endfor %}
+                <td></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<hr><hr>
+{{result|safe}}
+
+{% endblock %}

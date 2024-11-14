@@ -1,0 +1,60 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+<br>
+
+<div class="container">
+    <h5 style="color: #F67007; font-weight:bold; text-align:center;">የዕቅድና የክንውን ንጽጽር በእያንዳንዱ ፕሮጀክት</h5>
+    <form style="overflow: hidden; float: right;clear: both;">
+        <label for="html"> የፕሮጀክቱን ስም</label>
+        <input type="text" name="q">
+        <button> ፈልግ </button>
+    </form>
+</div>
+<div class="container">
+    <table class="table table-sm">
+        <thead class="table-light">
+            <th>የፕሮጀክቱ ስም</th>
+            <th>የሐምሌ ዕቅድ</th>
+            <th>የሐምሌ ክንውን</th>
+            <th>የሐምሌ ንጽጽር</th>
+            <th>የነሃሴ ዕቅድ</th>
+            <th>የነሃሴ ክንውን</th>
+            <th>የነሃሴ ንጽጽር</th>
+            <th>የሁለት ወር ዕቅድ</th>
+            <th>የሁለት ወር ክንውን</th>
+            <th>የሁለት ወር  ንጽጽር</th>
+            <th>የመስከረም ዕቅድ</th>
+            <th>የመስከረም ክንውን</th>
+            <th>የሦስት ወር ዕቅድ</th>
+            <th>የሦስት ወር ክንውን</th>
+            <th>የሦስት ወር  ንጽጽር</th>
+            <th>የጥቅምት ዕቅድ</th>
+            <th>የጥቅምት ክንውን</th>
+            <th>የአራት ወር ዕቅድ</th>
+            <th>የአራት ወር ክንውን</th>
+            <th>የአራት ወር  ንጽጽር</th>
+            <th>የህዳር ዕቅድ</th>
+            <th>የህዳር ክንውን</th>
+            <th>የአምስት ወር ዕቅድ</th>
+            <th>የአምስት ወር ክንውን</th>
+            <th>የአምስት ወር  ንጽጽር</th>
+            <th></th>
+        </thead>
+        {% for item, item2 in zppm %}
+        <tr>
+            <td>{{ item.erabudget}}</td>
+            <td>{{ item.bapinKm|floatformat:2|intcomma}}</td>
+            <td>{{ item.accomplishment.actionInKm|floatformat:2|intcomma}}</td>
+            <td>{{ item.comp|floatformat:2}}</td>
+            <td>{{ item2.bapinKm|floatformat:2|intcomma}}</td>
+            <td>{{ item2.accomplishment.actionInKm|floatformat:2|intcomma}}</td>
+            <td>{{ item2.comp|floatformat:2}}</td>
+            <td>{{ item.bapinKm|add:item2.bapinKm}}</td>
+            <td>{{ item.accomplishment.actionInKm|add:item2.accomplishment.actionInKm}}</td>
+            <td>{% widthratio item.accomplishment.actionInKm|add:item2.accomplishment.actionInKm item.bapinKm|add:item2.bapinKm 100 %}</td>        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,392 @@
+{% load static %}
+
+{% block content %}
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+</head>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-style: normal;
+    }
+
+    #logo{
+        height: 45px;
+    }
+
+    #logo-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #header-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1px 80px;
+    }
+
+    .main-btn{
+        padding: 10px 20px;
+        background-color: #FF6B00;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .navLink{
+        font-size: 17px;
+        padding: 10px 20px;
+        color: #333;
+        text-decoration: none;
+        transition: 0.5s;
+    }
+    .navLink:hover{
+        color: #f7951c;
+    }
+
+    .homehero{
+        height: 200px;
+        background: #FF6B00;
+        display: flex;
+        justify-content: space-between;
+        gap: 100px;
+        color: white;
+    }
+    .homeherotext{
+        padding: 10px 130px;
+    }
+
+    .aboutContainer{
+        background: #FF6B00;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+    }
+    #readmore{
+        padding: 10px 20px;
+        background-color: #ccc;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #heroimg{
+        width: 80%;
+        height: 100%;;
+    }
+
+    #aboutimg{
+        padding-left: 60px;
+    }
+
+
+    .statContainer{
+        display: flex;
+        justify-content: space-around;
+        padding: 5px 0;
+    }
+
+    .statNum{
+        font-size: 30px;
+        text-align: center;
+        color: #FF6B00;
+    }
+
+    .about-para{
+        padding: 20px 0;
+        line-height: 25px;
+    }
+
+    .contactcontainer{
+        display: flex;
+        justify-content: space-between;
+        padding: 50px 60px;
+    }
+
+    .contactcontainer img{
+        width: 80%;
+        height: 100%;
+    }
+
+    .contact-container{
+        margin-right: 150px;
+        padding: 20px;
+        width: 500px;
+        border-radius: 20px;
+        background-color: #E47610;
+        color: white;
+    }
+
+    .contact-container h3{
+        font-size: 16px;
+    }
+
+    .contact-container h4{
+        font-size: 14px;
+    }
+
+    .contact-container p{
+        font-size: 14px;
+        font-weight: 300;
+    }
+
+    .contact-container h1{
+        font-size: 20px;
+        padding: 20px 0;
+    }
+
+    .contact-container button{
+        width: 100%;
+        padding: 20px 20px;
+        background-color: #000;
+        color: white;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+
+    .histContainer{
+        display: flex;
+        justify-content: space-between;
+        /* padding: 10px 60px; */
+        gap: 10px
+    }
+
+    .histContainer img{
+        width: 40%;
+        height: 100%;
+    }
+
+    .histContainer p {
+        /* padding: 20px 0; */
+        line-height: 25px;
+    }
+
+    .footer {
+  background-color: #1E1E1E;
+  color: #fff;
+  padding: 5px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 20px;
+}
+
+.footer-section {
+  margin-bottom: 20px;
+}
+
+.footer-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.footer-description {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer-list {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-list li {
+  margin-bottom: 8px;
+}
+
+.footer-list a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-list a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+.slider {
+    overflow: hidden;
+}
+
+.slides {
+    padding: 0px 120px;
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.histContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.histContainer img {
+    max-width: 20%;
+    height: auto;
+}
+
+button.prev, button.next {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
+button.prev:hover, button.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.slide:not(.active) {
+    display: none;
+}
+
+
+.controlCont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .footer-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+</style>
+
+<div class="container">
+<header id="header-container">
+    <div id="logo-container">
+        <img src="{% static '/images/mainlogo.png' %}" alt="Federal Road Network Mapping" id="logo">
+        <h1>I-RAMS</h1>
+    </div>
+    <div>
+        <a href="" class="navLink">FRNM</a>
+        <a href="" class="navLink">RNI</a>
+        <a href="" class="navLink">Structure Information</a>
+        <a href="" class="navLink">Traffic</a>
+        <a href="" class="navLink">RMI</a>
+        <a href="/about" class="navLink">About</a>
+    </div>
+    <div>
+        <a href="/login">
+            <button class="main-btn">Log In</button>
+        </a>
+    </div>
+</header>
+
+<div class="homehero">
+    <div class="homeherotext">
+        <h1>ERA just mentioned the big news.</h1>
+        <p>Ethiopia Road Administration, Road Asset Management strives to utilize various systems to effectively manage road assets.</p>
+        <button id="readmore">Read More</button>
+    </div>
+    <div>
+        <img src="{% static '/images/bridge1.png' %}" alt="Federal Road Network Mapping" id="heroimg">
+    </div>
+</div>
+<div class="slider">
+    <div class="slides">
+        <!-- Slide 1 -->
+        <div class="slide active">
+            <div class="histContainer">
+                <div>
+                    <h1>History of Ethiopia Roads Development</h1>
+                    <p>Like in any other country, movement on roads in ancient Ethiopia was done on trails and foot paths in addition to the traditional shoulder porter age, animals like mules, donkeys, horses and camels were used as a means of transportation. Historic chronicles of 17th, and 18th centuries show that there were a number of small roads (rails and foot paths) in use in various small kingdoms of the country. Prior to the 17th century, there were efforts in bridge constructions in Ethiopia.</p>
+                </div>
+                <img src="{% static '/images/oldroad.png' %}" alt="history of road1">
+            </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="slide">
+            <div class="histContainer">
+                <div>
+                    <h1>The Longest Bridge in Ethiopia</h1>
+                    <p>Ethiopia has officially launched the construction of its longest bridge across the Abay River in Amhara regional state. Friday’s launching event was attended by Deputy Prime Minister Demeke Mekonnen, Administrator of the region Temesgen Tiruneh, and Transport minister Dagmawit Moges, among others. It will have a 2x21.5m width and the capacity to accommodate a two-way three-lane carriageway, a bicycle path and a walkway. It will cost the government close to 51 million USD. The construction project is expected to take three years for completion, reports state run-news agency.</p>
+                </div>
+                <img src="{% static '/images/longest.png' %}" alt="Longest Bridge in Ethiopia">
+            </div>
+        </div>
+    </div>
+    <!-- Next and Previous Buttons -->
+     <div class="controlCont">
+    <button class="prev" onclick="changeSlide(-1)">❮</button>
+    <button class="next" onclick="changeSlide(1)">❯</button>
+</div>
+</div>
+<div class="statContainer">
+    <div>
+        <h1 class="statNum">11</h1>
+        <h2>Districts</h2>
+    </div>
+    <div>
+        <h1 class="statNum">5300+</h1>
+        <h2>Bridges</h2>
+    </div>
+    <div>
+        <h1 class="statNum">40,300+</h1>
+        <h2>Culverts</h2>
+    </div>
+    <div>
+        <h1 class="statNum">30,000+</h1>
+        <h2>Road Network Length</h2>
+    </div>
+</div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <div class="footer-bottom">
+        © 2024 Ethiopian Roads Authority - All Rights Reserved.
+    </div>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+    }
+
+    function changeSlide(direction) {
+        currentSlide = (currentSlide + direction + slides.length) % slides.length;
+        showSlide(currentSlide);
+    }
+</script>
+
+{% endblock %}

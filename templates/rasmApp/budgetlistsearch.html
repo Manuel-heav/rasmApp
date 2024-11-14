@@ -1,0 +1,72 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<center>
+
+    Search Employees using Dropdown Search
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+        <select name="bproject">
+            <option selected disabled=true>--Select Project--</option>
+            <option>መንገድ</option>
+            <option>ድልድይ</option>
+            <option>ማማከር አገልግሎት</option>
+            <option>የካሳ ክፍያ</option>
+            <option>ሌሎች</option>
+        </select>
+        <select name="bcontractor">
+            <option selected disabled=true>--Select Contractor--</option>
+            <option>የራስ ሃይል ተቋራጭ</option>
+            <option>የመንግስት ተቋራጭ</option>
+            <option>የግል ተቋራጭ</option>
+            <option>ማማከር አገልግሎት</option>
+            <option>የካሳ ክፍያ</option>
+        </select>
+        <input type="submit" value="Search">
+        <hr>
+        <table border="1">
+            <tr>
+                <th>Id</th>
+                <th>District</th>
+                <th>Financer</th>
+                <th>Project</th>
+                <th>Project Name</th>
+                <th>Maintenance Types</th>
+                <th>Region</th>
+                <th>Contractor</th>
+                <th>Contractor Name</th>
+                <th>Consultant</th>
+                <th>Road Segment Part</th>
+                <th>Road Typa</th>
+                <th>Length</th>
+                <th>Approved Budget</th>
+                <th>Budget Year</th>
+            </tr>
+            {% for budget in data %}
+            <tr>
+                <td>{{ budget.id }}</td>
+                <td>{{ budget.bdistrict }}</td>
+                <td>{{ budget.bfinancer }}</td>
+                <td>{{ budget.bproject }}</td>
+                <td>{{ budget.bprojectname }}</td>
+                <td>{{ budget.bworktype }}</td>
+                <td>{{ budget.bregions }}</td>
+                <td>{{ budget.bcontractor }}</td>
+                <td>{{ budget.bcontractorname }}</td>
+                <td>{{ budget.bconsultant }}</td>
+                <td>{{ budget.broadsegment }}</td>
+                <td>{{ budget.byear }}</td>
+                <td>{{ budget.budgetamount }}</td>
+                <td>{{ budget.basphalt }}</td>
+                <td>{{ budget.bgravel }}</td>
+            </tr>
+            {% endfor %}        
+        </table>   
+    </form>
+</center>
+
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+  <div id="container" style="width: 75%;">
+    <canvas id="apacomp-elvm-chart" data-url="{% url 'apacomp-elvm-chart' %}"></canvas>
+  </div>
+  <div class="container">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <script>
+
+    $(function () {
+
+      var $districtChart = $("#apacomp-elvm-chart");
+      $.ajax({
+        url: $districtChart.data("url"),
+        success: function (data) {
+
+          var ctx = $districtChart[0].getContext("2d");
+
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: data.labels,
+              datasets: [{
+                label: 'የ11 ወራት ዕቅድ በብር',
+                backgroundColor: 'lightblue',
+                data: data.data
+              }, {
+                label: 'የ11 ወራት ክንውን በብር',
+                backgroundColor: 'brown',
+                data: data.data2
+              }]          
+            },
+            options: {
+              responsive: true,
+              legend: {
+                position: 'top',
+              },
+              title: {
+                display: true,
+                text: 'የ11 ወራት ዕቅድ / ክንውን ንጽጽር በየቅ/ጽ/ቢቱ'
+              }
+            }
+          });
+
+        }
+      });
+
+    });
+
+  </script>
+</div>
+{% endblock %}

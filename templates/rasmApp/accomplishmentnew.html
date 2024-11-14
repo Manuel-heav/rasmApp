@@ -1,0 +1,20 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+<br>
+<div class="container">
+    <h5 style="color: #F67007; font-weight:bold;">የ2017 በጀት ዓመት የፕሮጀክቶች ክንውን መመዝገቢያ</h5>
+</div>
+<hr>
+<div class="container">
+    <form method="POST">
+        {% load crispy_forms_tags %}
+        <!-- Security token by Django -->
+        {% csrf_token %}
+ 
+        {{ form|crispy }}
+        <input type="submit" value="Save">
+    </form>
+ 
+</div>
+{% endblock %}

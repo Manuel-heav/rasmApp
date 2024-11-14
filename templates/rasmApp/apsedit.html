@@ -1,0 +1,32 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+
+<table class="table table-bordered table-striped table-light">
+    <form method="post" action="{% url 'apsedit' %}">
+    {% csrf_token %}
+    <tr>
+        <th>የፕሮጀክቱ ስም</th><th>ወር</th><th>ክንውን (በብር)</th><th>ክንውን (በኪሜ)</th><th>አስተያየት</th><th>ተጨማሪ አስተያየት</th><th colspan="2"></th>
+    </tr>
+    {% for field in form %}
+        <tr>
+            {% if form.instance.id == field.id %}
+            {% include 'rasmApp/saveapsedit.html' %}
+            {% else %}
+            <td> {{ field.erabudget }}</td> 
+            <td>{{ field.bapmonth }}</td>
+            <td>{{ field.actionInBr }}</td>
+            <td>{{ field.actionInKm }}</td>
+            <td>{{ field.bremark1 }}</td>
+            <td>{{ field.bremark2 }}</td>
+            <td><button formnovalidate class="btn btn-sm" style="background-color: #F67007; color: white;" name='edit' value = "{{ field.id }}">ክንውን</button></td>
+            <!--<td><button formnovalidate class="btn btn-danger" name='delete' value = "{{ field.id }}">Delete</button></td>-->
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </form>
+</table>
+
+
+
+{% endblock %}

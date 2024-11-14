@@ -1,0 +1,145 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<style>
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      background-color: #f9f9f9;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    th, td {
+      padding: 18px !important;
+      vertical-align: middle;
+      border: none; /* Removed borders */
+    }
+  
+    th {
+      background-color: #F0F0F0;
+      color: #333;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  
+    td {
+      background-color: #FFF;
+      color: #333;
+    }
+  
+    tr:nth-child(even) td {
+      background-color: #F7F7F7; /* Alternating row background */
+    }
+  
+    tr:hover td {
+      background-color: #eaeaea; /* Hover effect */
+    }
+  
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      th, td {
+        padding: 8px;
+        font-size: 14px;
+      }
+    }
+  </style>
+  
+
+
+<br>
+<div class="container">
+<table id="dataTable" class="table">
+    <thead class="table-light">
+        <tr><th colspan="13" style="text-align: center; vertical-align:middle">የዘጠኝ ወራት ዕቅድ ክንውን ማነጻጸሪያ - በእያንዳንዱ ፕሮጀክት</th></tr>
+        <tr>
+            <th rowspan="2" style="text-align: center; vertical-align:middle">የፕሮጀክቱ ስም</th>
+            <th colspan="6" style="text-align: center; vertical-align:middle">ፋይናንሺያል</th>
+            <th colspan="6" style="text-align: center; vertical-align:middle">ፊዚካል</th>
+        </tr>
+        <tr>
+        <th>የመጋቢት ወር ዕቅድ  (ብር)</th>
+        <th>የመጋቢት ወር ክንውን  (ብር)</th>
+        <th>የወሩ ንጽጽር (%)</th>
+        <th>የ9 ወራት ዕቅድ</th>
+        <th>የ9 ወራት ክንውን</th>
+        <th>የ9 ወራት ንጽጽር (%)</th>
+        <th>የመጋቢት ወር ዕቅድ  (ኪ.ሜ)</th>
+        <th>የመጋቢት ወር ክንውን  (ኪ.ሜ)</th>
+        <th>የወሩ ንጽጽር (%)</th>
+        <th>የ9 ወራት ዕቅድ</th>
+        <th>የ9 ወራት ክንውን</th>
+        <th>የ9 ወራት ንጽጽር (%)</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for item, item2 in zipninth %}
+    <tr>
+        <td>{{item.erabudget__bprojectname}}</td>
+        <td>{{item.budgetedap__bapinBr|floatformat:2|intcomma}}</td>
+        <td>{{item.actionInBr|floatformat:2|intcomma}}</td>
+        <td>{{item.compf|floatformat:2|intcomma }}</td>
+        <td>{{item2.aptotalbr|floatformat:2|intcomma }}</td>
+        <td>{{item2.acomptotalbr|floatformat:2|intcomma }}</td>
+        <td>{{item2.fincomp|floatformat:2|intcomma }}</td>
+        <td>{{item.budgetedap__bapinKm|floatformat:2|intcomma }}</td>
+        <td>{{item.actionInKm|floatformat:2|intcomma }}</td>
+        <td>{{item.compl|floatformat:2|intcomma }}</td>
+        <td>{{item2.aptotalkm|floatformat:2|intcomma }}</td>
+        <td>{{item2.acomptotalkm|floatformat:2|intcomma }}</td>
+        <td>{{item2.phycomp|floatformat:2|intcomma }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div class="pagination">
+    <button id="prevBtn" onclick="changePage(-1)" disabled>Previous</button>
+    <span id="pageInfo"></span>
+    <button id="nextBtn" onclick="changePage(1)">Next</button>
+</div>
+</div>
+
+<script>
+    let currentPage = 1;
+    const rowsPerPage = 10;
+    const table = document.getElementById('dataTable');
+    const rows = table.getElementsByTagName('tbody')[0].rows;
+    const pageInfo = document.getElementById('pageInfo');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function showPage(page) {
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+
+        for (let i = 0; i < rows.length; i++) {
+            if (i >= start && i < end) {
+                rows[i].style.display = '';
+            } else {
+                rows[i].style.display = 'none';
+            }
+        }
+
+        pageInfo.textContent = `Page ${page} of ${Math.ceil(rows.length / rowsPerPage)}`;
+        prevBtn.disabled = page === 1;
+        nextBtn.disabled = page === Math.ceil(rows.length / rowsPerPage);
+    }
+
+    function changePage(direction) {
+        currentPage += direction;
+        showPage(currentPage);
+    }
+
+    showPage(1);
+</script>
+
+{% endblock %}

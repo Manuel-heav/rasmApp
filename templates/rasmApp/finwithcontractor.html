@@ -1,0 +1,33 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+
+<h1>Items Grouped by Category</h1>
+<table class="table">
+    <thead class="table-light">
+        <th>Financer</th>
+        <th>Contractor</th>
+        <th>Work Type</th>
+        <th>Total Budget</th>
+        <th>Asphalt Len</th>
+        <th>Gravel Len</th>
+    </thead>
+    {% for item in gdata %}
+    <tr>
+        <td>{{ item.bfinancer__financerName }}</td>
+        <td>{{ item.bcontractor }}</td>
+        <td>{{ item.bworktype__maintenancetype }}</td>
+        <td>{{ item.total_budget|floatformat:2|intcomma }}</td>
+        <td>{{ item.total_asphalt|floatformat:2|intcomma }}</td>
+        <td>{{ item.total_gravel|floatformat:2|intcomma }}</td>
+    </tr>
+    {% endfor %}
+    <tr><td></td><td></td><td>ድምር</td><td>{{ total_sum_budget|floatformat:2|intcomma }}</td><td>{{ gtotal_asphalt|floatformat:2|intcomma }}</td><td>{{ gtotal_gravel|floatformat:2|intcomma }}</td></tr>
+</table>
+<h2>Total Sum of All Values: {{ total_sum_budget|floatformat:2|intcomma }}</h2>
+<h2>Total Sum of All Values: {{ gtotal_asphalt|floatformat:2|intcomma }}</h2>
+<h2>Total Sum of All Values: {{ gtotal_gravel|floatformat:2|intcomma }}</h2>
+
+{% endblock %}

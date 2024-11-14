@@ -1,0 +1,40 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<style>
+    table {
+        width: 80%;
+        border: 1px solid black;
+    }
+    table tr, td, th {
+        border: 1px solid black;
+    }
+</style>
+
+<br>
+<h5 style="color: #F67007; font-weight:bold;">በ2017 በጀት ዓመት የጸደቀው በጀት በፕሮጀክቶቹ ዓይነት </h5>
+<hr><hr>
+<div class="container">
+    <table class="table" style="width: 50%">
+      <thead class="table-light">
+        <tr>
+          <th>የፕሮጀክት ዓይነት</th>
+          <th>የስራው ዓይነት</th>
+          <th>የበጀት መጠን (ብር)</th>
+        </tr>
+      </thead>
+        {% for field in projectl %}
+          <tr>
+            <td>{{ field.bproject__project }}</td>
+            <td>{{ field.bworktype__maintenancetype }}</td>
+            <td style="text-align: right;">{{ field.total_value|floatformat:2|intcomma }}</td>
+          </tr>
+        {% endfor %}
+        <tr class="tr-light" style="text-align:right;background-color:#F67007; color: white;"><td></td><td>ድምር</td><td>{{tsum|floatformat:2|intcomma }}</td></tr>
+        
+      </table>
+</div>
+
+{% endblock %}

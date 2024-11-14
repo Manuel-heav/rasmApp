@@ -1,0 +1,28 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+
+<table class="table">
+    <thead>
+        <th>RSeg</th>
+        <th>Condition</th>
+        <th>Severity</th>
+        <th>Extent</th>
+        <th>Activity</th>
+        <th>Quantity</th>
+    </thead>
+    {% for r in roadseg %}
+    <tr>
+        <td>{{r.roadsegment.roadname}}</td>
+        {% for c in r.roadconditionsurvey_set.all %}
+        <tr>
+            <td>{{c.problem}}</td>
+            <td>{{c.activity.activity}}</td>
+            <td>{{c.qty}}</td>
+    </tr>
+
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

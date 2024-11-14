@@ -1,0 +1,74 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<table class="table">
+    <thead class="table-light">
+        <th>የሥራው ዓይነት</th>
+        <th>ሐምሌ</th>
+        <th>ነሃሴ</th>
+        <th>መስከረም</th>
+        <th>ጥቅምት</th>
+        <th>ህዳር</th>
+        <th>ታህሳስ</th>
+        <th>ጥር</th>
+        <th>የካቲት</th>
+        <th>መጋቢት</th>
+        <th>ሚያዚያ</th>
+        <th>ግንቦት</th>
+        <th>ሰኔ</th>
+    </thead>
+    <tbody>
+        {% for row in apsall_pivot %} 
+        <tr>
+        {% for value in row.values %}
+        <td>{{ value }}</td>
+        {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<hr><hr><hr>
+<table>
+    <tr>
+      {% for col in table_html.columns %}
+        <td>
+          {{col}}
+        </td>
+      {% endfor %}
+    </tr>
+      {% for index, row in table_html.iterrows %}
+        <tr>
+          {% for cell in row %}
+            <td>
+              {{cell}}
+            </td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+</table>
+<br><hr>
+<table>
+    <tbody>
+      {% for erabudget__bworktype__maintenancetype	 in t_allap %}
+      <tr>
+        {% for bapmonth in erabudget__bworktype__maintenancetype	%}
+           <td>{{bapmonth}}</td>
+        {% endfor %} 
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+<div class="row">
+<hr><hr>
+    {{allap}}
+    
+    
+    {% for i in allap %}
+        <li>{{i.erabudget__bworktype__maintenancetype}} -- {{i.SegmentCount}} -- {{i.bapmonth}}-- {{i.APtotal_Km}}-- {{i.Acomptotal_Km}}</li>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<style>
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      background-color: #f9f9f9;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    th, td {
+      padding: 18px !important;
+      vertical-align: middle;
+      border: none; /* Removed borders */
+    }
+  
+    th {
+      background-color: #F0F0F0;
+      color: #333;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  
+    td {
+      background-color: #FFF;
+      color: #333;
+    }
+  
+    tr:nth-child(even) td {
+      background-color: #F7F7F7; /* Alternating row background */
+    }
+  
+    tr:hover td {
+      background-color: #eaeaea; /* Hover effect */
+    }
+  
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      th, td {
+        padding: 8px;
+        font-size: 14px;
+      }
+    }
+  </style>
+  
+
+<br>
+<div class="container">
+<h5>በ2017 የመንገድ ጥገና ስራ ተቋራጮች ዕቅድና ክንውን ንጽጽር</h5>
+<table class="table table-bordered border-primary">
+    <thead class="table-light">
+        <th>የስራው ዓይነት</th>
+        <th>አስፋልት መንገድ ርዝመት</th>
+        <th>የጠጠር መንገድ ርዝመት</th>
+        <th>ጠቅላላ የመንገድ ርዝመት</th>
+    </thead>
+    {% for item in ownfalldata %}
+    <tr>
+        <td>{{ item.bcontractor }}</td>
+        <td>{{ item.total_asphalt|floatformat:2|intcomma }}</td>
+        <td>{{ item.total_gravel|floatformat:2|intcomma }}</td>
+        <td>{{ item.tsum|floatformat:2|intcomma }}</td>
+    </tr>
+    {% endfor %}
+    <tr><td>ድምር</td><td>{{ownfallasphsum|floatformat:2|intcomma }}</td><td>{{ownfallgrvsum|floatformat:2|intcomma }}</td><td>{{ownfalltsum|floatformat:2|intcomma }}</td></tr>
+</table>
+</div>
+{% endblock %}

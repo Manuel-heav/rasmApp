@@ -1,0 +1,50 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <h5 style="color: #F67007; font-weight:bold;">የ2017 በጀት ዓመት የፕሮጀክቶች ክንውን መመዝገቢያ</h5>
+        </div>
+        <div class="col-2">
+            <a class="btn btn-sm" style="background-color: #F67007; color: white;" href="{% url 'alemgena' %}"><i class="fa-arrow-left"></i>በጀት ዝርዝር</a>
+        </div>
+        <div class="col-2">
+            <a class="btn btn-sm" style="background-color: #F67007; color: white;" href="{% url 'accomplishmentnew' %}">አዲስ ክንውን</a>
+        </div>
+    </div>
+</div>
+<hr>
+
+<div class="container">
+    <table class="table table-sm">
+        <thead class="table-light">
+            <tr>
+                <th>ፕሮጀክት</th>
+                <th>ወር</th>
+                <th>ብር</th>
+                <th>ኪ.ሜ</th>
+                <th>አስተያየት</th>
+                <th>ተጨማሪ አስተያየት</th>
+            </tr>
+        </thead>
+        {% for field in apacomp %}
+        <tr>
+            <td> {{ field.erabudget }}</td> 
+            <td>{{ field.month }}</td>
+            <td>{{ field.bapinBr|floatformat:2|intcomma }}</td>
+            <td>{{ field.bapinKm|floatformat:2 }}</td>
+            <td>{{ field.financialacomp|floatformat:2|intcomma }}</td>
+            <td>{{ field.physicalacomp|floatformat:2 }}</td>
+            <td>{{ field.remark1 }}</td>
+            <td>{{ field.remark2 }}</td>
+            <td><a class="btn btn-outline-danger btn-sm btn-block" href="{% url 'accomplish' field.id %}">አክሽን ፕላን</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+{% endblock %}

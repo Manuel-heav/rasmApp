@@ -1,0 +1,17 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load humanize %}
+
+
+<h1>{{ roadsegext.roadname }}</h1>
+<h2>{{ rs.fromlen }} - {{ rs.tolen }}</h2>
+
+    {% for c in roadcond %}
+        <li>{{c.activity__activitycode}}</li>
+        <li>{{c.activity__activity}}</li>
+        <li>{{c.activity__unit}}</li>
+        <li>{{c.activity__urate|floatformat:2|intcomma }}</li>
+        <li>{{c.qty_total|floatformat:2|intcomma }}</li>
+        <li>{{c.amt_total|floatformat:2|intcomma }}</li>
+    {% endfor %}
+{% endblock %}

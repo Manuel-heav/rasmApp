@@ -1,0 +1,337 @@
+{% load static %}
+
+{% block content %}
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+</head>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-style: normal;
+    }
+
+    #logo{
+        height: 45px;
+    }
+
+    #logo-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #header-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1px 80px;
+    }
+
+    .main-btn{
+        padding: 10px 20px;
+        background-color: #FF6B00;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .navLink{
+        font-size: 17px;
+        padding: 10px 20px;
+        color: #333;
+        text-decoration: none;
+        transition: 0.5s;
+    }
+    .navLink:hover{
+        color: #f7951c;
+    }
+
+    .homehero{
+        background: #FF6B00;
+        display: flex;
+        justify-content: space-between;
+        gap: 100px;
+        color: white;
+    }
+    .homeherotext{
+        padding: 40px 130px;
+
+    }
+
+    .aboutContainer{
+        background: #FF6B00;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+    }
+    .homeherotext{
+        padding: 40px 130px;
+
+    }
+    #readmore{
+        padding: 10px 20px;
+        background-color: #ccc;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #heroimg{
+        width: 80%;
+        height: 100%;;
+    }
+
+    #aboutimg{
+        height: 300px;
+        padding-left: 60px;
+    }
+
+
+    .statContainer{
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0;
+    }
+
+    .statNum{
+        font-size: 30px;
+        text-align: center;
+        color: #FF6B00;
+    }
+
+    .about-para{
+        padding: 20px 0;
+        line-height: 25px;
+    }
+
+    .contactcontainer{
+        display: flex;
+        justify-content: space-between;
+        padding: 50px 60px;
+    }
+
+    .contactcontainer img{
+        width: 80%;
+        height: 100%;
+    }
+
+    .contact-container{
+        margin-right: 150px;
+        padding: 20px;
+        width: 500px;
+        border-radius: 20px;
+        background-color: #E47610;
+        color: white;
+    }
+
+    .contact-container h3{
+        font-size: 16px;
+    }
+
+    .contact-container h4{
+        font-size: 14px;
+    }
+
+    .contact-container p{
+        font-size: 14px;
+        font-weight: 300;
+    }
+
+    .contact-container h1{
+        font-size: 20px;
+        padding: 20px 0;
+    }
+
+    .contact-container button{
+        width: 100%;
+        padding: 20px 20px;
+        background-color: #000;
+        color: white;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+
+    .histContainer{
+        display: flex;
+        justify-content: space-between;
+        padding: 50px 60px;
+        gap: 80px
+    }
+
+    .histContainer img{
+        width: 40%;
+        height: 100%;
+    }
+
+    .histContainer p {
+        padding: 20px 0;
+        line-height: 25px;
+    }
+
+    .footer {
+  background-color: #1E1E1E;
+  color: #fff;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 20px;
+}
+
+.footer-section {
+  margin-bottom: 20px;
+}
+
+.footer-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.footer-description {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer-list {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-list li {
+  margin-bottom: 8px;
+}
+
+.footer-list a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-list a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .footer-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+</style>
+
+<div class="container">
+<header id="header-container">
+    <div id="logo-container">
+        <img src="{% static '/images/mainlogo.png' %}" alt="Federal Road Network Mapping" id="logo">
+        <h1>I-RAMS</h1>
+    </div>
+    <div>
+        <a href="" class="navLink">FRNM</a>
+        <a href="" class="navLink">RNI</a>
+        <a href="" class="navLink">Structure Information</a>
+        <a href="" class="navLink">Traffic</a>
+        <a href="" class="navLink">RMI</a>
+        <a href="/about" class="navLink">About</a>
+    </div>
+    <div>
+        <a href="/login">
+            <button class="main-btn">Log In</button>
+        </a>
+    </div>
+</header>
+
+<div class="aboutContainer">
+    <div>
+        <img src="{% static '/images/ERA-HomePage-Pic.png' %}" alt="Federal Road Network Mapping" id="aboutimg">
+    </div>
+    <div class="homeherotext">
+        <h1>About ERA RAM</h1>
+        <p class="about-para">
+            The Ethiopian Road Administration (ERA) Road Asset Management (RAM) is responsible for overseeing and optimizing the maintenance and budget allocation for roads and bridges across the country. Managing 11 districts, ERA RAM ensures that infrastructure remains safe and efficient by tracking the condition of roads and bridges, analyzing data, and adjusting budgets as necessary. This systematic approach helps to prioritize critical repairs, upgrades, and resource allocation to meet both short-term and long-term goals. By closely monitoring these assets, ERA RAM supports Ethiopia’s infrastructure development, ensuring that the country’s road network continues to serve the growing needs of its population and economy.
+        </p>
+        
+    </div>
+</div>
+
+
+<!-- <div class="contactcontainer">
+    <div class="contact-container">
+        <div>
+            <h3>Contact Info</h3>
+
+            <div>
+                <h4>Our Location</h4>
+                <p>Mexico, Random Building 21th Floor</p>
+            </div>
+
+            <div>
+                <h4>Quick Contact</h4>
+                <p>Email: contact@eraram.com</p>
+                <p>Call Us: +25123456789</p>
+            </div>
+
+            <div>
+                <h4>Opening Hours</h4>
+                <p>Monday - Friday</p>
+                <p>09:00 AM - 06:00 PM</p>
+            </div>
+            
+            <h1>Do You Have Any Question, Just Contact Us To Get Help!</h1>
+            <button>Contact Us</button>
+        </div>
+    </div>
+</div> -->
+
+<footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3 class="footer-title">About ERA RAM</h3>
+        <p class="footer-description">
+          Ethiopian Road Administration (ERA) Road Asset Management is responsible for
+          overseeing and optimizing the country's road infrastructure, ensuring safety
+          and efficient use of resources.
+        </p>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Services</h3>
+        <ul class="footer-list">
+          <li><a href="#">Road Maintenance</a></li>
+          <li><a href="#">Bridge Management</a></li>
+          <li><a href="#">Budget Allocation</a></li>
+          <li><a href="#">District Management</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Contact Us</h3>
+        <ul class="footer-list">
+          <li>Email: info@era-ram.et</li>
+          <li>Phone: +251-123-4567</li>
+          <li>Address: Addis Ababa, Ethiopia</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Ethiopian Road Administration Road Asset Management. All Rights Reserved.</p>
+    </div>
+  </footer>
+  
+</div>
+{% endblock %}
+

@@ -1,0 +1,138 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style>
+    /* Container and layout */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .row {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* Card styling */
+    .card {
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    h5 {
+        font-size: 1.8em;
+        color: #F67007;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    /* Table styling */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        border: none;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: left;
+        font-size: 1.1em;
+    }
+
+    th {
+        background-color: #F67007;
+        color: white;
+        font-weight: bold;
+    }
+
+    td {
+        background-color: #f9f9f9;
+    }
+
+    /* Alternating row background */
+    tr:nth-child(even) td {
+        background-color: #f2f2f2;
+    }
+
+    /* Custom form submit button */
+    input[type="submit"] {
+        background-color: #F67007;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.1em;
+        border-radius: 6px;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #d75a00;
+    }
+
+    /* Typography */
+    p {
+        font-size: 1.2em;
+        margin: 10px 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .card {
+            padding: 15px;
+        }
+
+        th, td {
+            font-size: 0.9em;
+        }
+    }
+</style>
+
+<br>
+
+<div class="container">
+    <div class="row">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ formset.management_form }}
+            <div class="row">
+                <div class="col-md">
+                    <div class="card card-body">
+                        <h5>አክሽን ፕላን | Action Plan</h5>
+                        <div class="card card-body">
+                            <p>የፕሮጀክቱ ስም:&emsp; {{budgetext.budget}}</p> 
+                            <p>የመንገዱ ዓይነት:&emsp; {{budgetext.roadT}}&emsp;&emsp; ኪ.ሜ &ensp;{{budgetext.lenToBeMaintained}}</p>
+                        </div>
+                        <table class="table">
+                            <tr>
+                                <th>ወር</th>
+                                <th>ዕቅድ (በገንዘብ)</th>
+                                <th>ዕቅድ (በኪ.ሜ)</th>
+                            </tr>
+                            {% for form in formset %}
+                            <tr>
+                                <td>{{form.forTheMonth}}</td>
+                                <td>{{form.actionPlanInBr}}</td>
+                                <td>{{form.actionPlanInKm}}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" name="Submit" value="Submit">
+        </form>
+    </div>
+</div>
+
+{% endblock %}

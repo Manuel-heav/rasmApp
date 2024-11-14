@@ -1,0 +1,80 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<style>
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      background-color: #f9f9f9;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    th, td {
+      padding: 18px !important;
+      vertical-align: middle;
+      border: none; /* Removed borders */
+    }
+  
+    th {
+      background-color: #F0F0F0;
+      color: #333;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  
+    td {
+      background-color: #FFF;
+      color: #333;
+    }
+  
+    tr:nth-child(even) td {
+      background-color: #F7F7F7; /* Alternating row background */
+    }
+  
+    tr:hover td {
+      background-color: #eaeaea; /* Hover effect */
+    }
+  
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      th, td {
+        padding: 8px;
+        font-size: 14px;
+      }
+    }
+  </style>
+  
+<br>
+<div class="container">
+    <h5>በ2017 በእያንዳንዱ ቅ/ጽ/ቤት የሚጠገን ጠቅላላ የመንገድ ርዝመት (ኪ.ሜ)</h5>
+    <hr><br>
+    <table class="table">
+        <thead class="table-light">
+            <th>ቅ/ቢሮ</th>
+            <th>በ2017 የሚጠገን የአስፋልት መንገድ ርዝመት (ኪ.ሜ)</th>
+            <th>በ2017 የሚጠገን የጠጠር መንገድ ርዝመት (ኪ.ሜ)</th>
+            <th>በ2017 የሚጠገን ጠቅላላ የመንገድ ርዝመት (ኪ.ሜ)</th>
+        </thead>
+        {% for field in branchsummary %}
+        <tr>
+            <td>{{field.bdistrict__districtname}}</td>
+            <td>{{field.total_asphalt|floatformat:2|intcomma}}</td>
+            <td>{{field.total_gravel|floatformat:2|intcomma}}</td>
+            <td>{{field.total_sum|floatformat:2|intcomma}}</td>
+        </tr>
+        {% endfor %}
+        <tr><td>ድምር</td><td>{{tasphalt_sum|floatformat:2|intcomma}}</td><td>{{tgravel_sum|floatformat:2|intcomma}}</td><td>{{tsum|floatformat:2|intcomma}}</td></tr>
+    </table>
+</div>
+
+{% endblock %}

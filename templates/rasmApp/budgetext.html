@@ -1,0 +1,41 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <hr>
+            <p>ቅ/ቢሮ: &emsp;<span style="color:#F67007;">{{bext.budget.district}}</span></p>
+            <P>የስራው ዓይነት: &emsp;<span style="color:#F67007;">{{bext.budget.maintenancetypes}}</span></p>
+            <p>የፕሮጀክቱ ዓይነት: &emsp;<span style="color:#F67007;">{{bext.budget.project}}</span></p>
+            <p>የፕሮጀክቱ ስም: &emsp;<span style="color:#F67007;">{{bext.budget.projectName}}</span></p>
+            <p><a class="btn btn-outline-danger btn-sm btn-block" href="{% url 'create_actionplan' bext.id %}">አክሽን ፕላን</a></p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>ወር</th>
+                    <th>ዕቅድ በብር</th>
+                    <th>ዕቅድ በኪ.ሜ</th>
+                </tr>
+                {% for i in ap %}
+                    <tr>
+                        <td>{{i.forTheMonth}}</td>
+                        <td>{{i.actionPlanInBr}}</td>
+                        <td>{{i.actionPlanInKm}}</td>
+                        <p><a class="btn btn-outline-danger btn-sm btn-block" href="{% url 'create_apsummary' budgetedap.id %}">አክሽን ፕላን</a></p>
+                        <td><a class="btn btn-sm btn-outline-info" href="{% url 'update_actionplan' i.id %}">Update</a></td>
+                        <td><a class="btn btn-sm btn-outline-danger" href="{% url 'delete_actionplan' i.id %}">Delete</a></td>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

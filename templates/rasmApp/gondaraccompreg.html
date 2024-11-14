@@ -1,0 +1,85 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+<br>
+<div class="container">
+<h5 style="color: #F67007; font-weight:bold;">ክንውን ማሳወቂያ | Accomplishment Report</h5>
+<hr>
+<form action="{% url 'gondaraccompreg' %}" method="get">
+    <select name="workt">
+        <option selected disabled=true>--የስራውን ዓይነት መምረጫ--</option>
+        <option>መደበኛ ጥገና</option>
+        <option>ወቅታዊ ጥገና</option>
+        <option>ከባድ ጥገና</option>
+        <option>በአፈፃፀም ላይ የተመሰረተ መንገድ ጥገና (OPRC)</option>
+        <option>ኦቨርሌይ እና በአፈፃፀም ላይ የተመሰረተ መንገድ ጥገና</option>
+        <option>ኦቨርሌይ</option>
+        <option>የመሬት መንሸራተት እና ጎርፍ መከላከል ስራ</option>
+        <option>የመንገድ ደህንነት ስራ</option>
+        <option>የሚዛን ጣቢያ ስራዎች</option>
+        <option>የሚዛን ጣቢያ የማዘመን ስራዎች</option>
+        <option>የማማከር አገልግሎት</option>
+        <option>የከተማ አስፋልት መንገድ ማስፋት</option>
+        <option>የከተማ የአስፋልት ማልበስ ስራ (PTS)</option>
+        <option>የካሳ ክፍያ</option>
+        <option>ድልድይ መልሶ ግንባታ</option>
+        <option>ድልድይ/ፉካ ጥገና ስራ</option>
+        <option>ድንገተኛ ስራዎች</option>
+        <option>ኤርጎኖሚክስ</option>
+    </select>
+    <select name="months">
+        <option selected disabled=true>--ወሩን መምረጫ--</option>
+        <option>ሐምሌ</option>
+        <option>ነሃሴ</option>
+        <option>መስከረም</option>
+        <option>ጥቅምት</option>
+        <option>ህዳር</option>
+        <option>ታህሳስ</option>
+        <option>ጥር</option>
+        <option>የካቲት</option>
+        <option>መጋቢት</option>
+        <option>ሚያዚያ</option>
+        <option>ግንቦት</option>
+        <option>ሰኔ</option>
+    </select>
+    <input type="submit" value="Search"><span style="float: right;"><span style="color:blue">የተመረጠው የስራ ዓይነት፡ </span><b>{{worktype}}</b>&emsp;&emsp; <span style="color:blue">ወር: </span><b>{{month}}</b></span>
+    
+</form>
+<hr>
+<table class="table">
+    <thead class="table-light">
+        <tr>
+            <th rowspan="2"></th>
+            <th rowspan="2" style="text-align:center; vertical-align: middle;">የፕሮጀክቱ ስም</th>
+            <th rowspan="2" style="text-align:center; vertical-align: middle;">ሮድ ሴግመንት</th>
+            <th colspan="3" style="text-align:center;">ፋይናንሺያል (ብር)</th>
+            <th colspan="3" style="text-align:center;">ፊዚካል (ኪ.ሜ)</th>
+
+        </tr>
+        <tr>
+            <th>ዕቅድ</th>
+            <th>ክንውን</th>
+            <th>ንጽጽር</th>
+            <th>ዕቅድ</th>
+            <th>ክንውን</th>
+            <th>ንጽጽር</th>
+        </tr>
+    </thead>
+    {% for result in data %}
+    <tr>
+        <td><a class="btn btn-outline-danger btn-sm btn-block" href="{% url 'accomplish' result.id %}">ክንውን</a></td>
+        <td>{{result.erabudget}}</td>
+        <td>{{result.erabudget.broadsegment}}</td>
+        <td>{{result.budgetedap.bapinBr|floatformat:2|intcomma}}</td>
+        <td>{{result.actionInBr|floatformat:2|intcomma}}</td>
+        <td>{{result.comp|floatformat:2|intcomma}}</td>
+        <td>{{result.budgetedap.bapinKm|floatformat:2|intcomma}}</td>
+        <td>{{result.actionInKm|floatformat:2|intcomma}}</td>
+        <td>{{result.comp1|floatformat:2|intcomma}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+
+{% endblock %}

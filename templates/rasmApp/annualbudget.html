@@ -1,0 +1,55 @@
+{% extends "rasmApp/layout.html" %}
+{% block content %}
+{% load static %}
+
+<h2>With django-pivot</h2>
+<br>
+<div class="row">
+  <table class="table">
+  {% for row in pt %} 
+  <tr>
+  {% for value in row.values %}
+      <td>{{value}}</td>
+  {% endfor %}
+  </tr>
+</table>
+{% endfor %}
+
+
+</div>
+
+
+<table class="table">
+    <thead class="table-light">
+        <th>District</th>
+        <th>ሌሎች</th>
+        <th>መንገድ</th>
+        <th>የማማከር አገልግሎት</th>
+        <th>የቢሮ እድሳት እና ማሻሻያ ስራዎች</th>
+        <th>የቢሮ ግንባታ</th>
+        <th>የካምፕ ግንባታ</th>
+        <th>ድልድይ</th>
+    </thead>
+    <tbody>
+        <table>
+            <tr>
+              {% for col in pt.columns %}
+                <td>
+                  {{col}}
+                </td>
+              {% endfor %}
+            </tr>
+              {% for index, row in pt.iterrows %}
+                <tr>
+                  {% for cell in row %}
+                    <td>
+                      {{cell}}
+                    </td>
+                  {% endfor %}
+                </tr>
+              {% endfor %}
+          </table>    </tbody>
+</table>
+
+
+{% endblock %}
