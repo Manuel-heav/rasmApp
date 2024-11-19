@@ -143,22 +143,7 @@ th, td {
         }
     }
 </style>
-
 <br>
-<div class="row">
-    <div class="col-md">
-        <div class="card card-body">
-            <hr>
-            <p>District: &emsp;<span class="highlight">{{roadsegments.district}}</span></p>
-            <p>Section: &emsp;<span class="highlight">{{roadsegments.sectionname}}</span></p>
-            <p>Road Name: &emsp;<span class="highlight">{{roadsegments.roadname}}</span></p>
-            <p>Asphalt: &emsp;<span class="highlight">{{roadsegments.asphaltlength}}</span></p>
-            <p>Gravel: &emsp;<span class="highlight">{{roadsegments.gravellength}}</span></p>
-            <p>Total: &emsp;<span class="highlight">{{roadsegments.totall}}</span></p>
-            <a class="btn-custom btn-block" href="{% url 'condition_survey_form' roadsegments.id %}">Road Segment</a>
-        </div>
-    </div>
-</div>
 
 <div class="row">
     <div class="col-md">
@@ -166,21 +151,20 @@ th, td {
             <table class="table">
                 <thead>
                     <tr>
-                        <th>ወር</th>
-                        <th>ዕቅድ በብር</th>
-                        <th>ዕቅድ በኪ.ሜ</th>
-                        <th>Actions</th>
+                        <th>Road Segment</th>
+                        <th>Inspector</th>
+                        <th>From</th>
+                        <th>To</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for i in roadsegmentext %}
                     <tr>
-                        <td>{{i.roadsegext}}</td>
-                        <td>{{i.problem}}</td>
-                        <td>{{i.severity}}</td>
-                        <td>{{i.extent}}</td>
-                        <td>{{i.activity}}</td>
-                        <td>{{i.qty}}</td>
+                        <td>{{i.roadsegment}}</td>
+                        <td>{{i.inspector}}</td>
+                        <td>{{i.fromlen}}</td>
+                        <td>{{i.tolen}}</td>
+                        <td><a class="btn-custom btn-block" href="{% url 'condition_survey_form' i.id %}">Road Condition</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

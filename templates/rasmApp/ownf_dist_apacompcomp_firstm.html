@@ -57,6 +57,16 @@
   
 <br>
 <div class="container">
+  <form action="{% url 'ownf_dist_apacompcomp_firstm' %}" method="get">
+    <select name="fin">
+        <option selected disabled=true>--ፋይናንሰር--</option>
+        <option>All</option>
+        <option>መንገድ ፈንድ</option>
+        <option>ካፒታል በጀት</option>
+    </select>
+    <input type="submit" value="Search"><span style="float: right;"><span style="color:blue">ፋይናንሰር፡ </span><b>{{searchfin}}</b>&emsp;&emsp; </span>
+  </form>
+<hr>
 <table class="table">
     <thead class="table-light">
         <tr><th colspan="7" style="text-align: center; vertical-align:middle">የራስ ሃይል ተቋራጭ የሐምሌ ወር ዕቅድ ክንውን ማነጻጸሪያ - በእያንዳንዱ ቅ/ጽ/ቤት</th></tr>

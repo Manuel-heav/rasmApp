@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import ModelForm
+from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import *
@@ -11,6 +12,13 @@ class DistrictForm(ModelForm):
         model = District
         fields = ['districtname']
 
+
+class RoadSegmentExtForm(forms.ModelForm):
+    class Meta:
+        model = RoadSegmentExt
+        fields = '__all__' 
+
+RoadSegmentRoadSegmentExtFormSet = inlineformset_factory(RoadSegment, RoadSegmentExt, form=RoadSegmentExtForm, extra=2)
 
 class RoadConditionSurveyForm(forms.ModelForm):
     #disabled_fields = ['roadsegext', 'problem','qty']
@@ -33,6 +41,7 @@ class RoadConditionSurveyForm(forms.ModelForm):
         self.fields['roadsegext'].widget.attrs['readonly'] = True
         self.fields['qty'].widget.attrs['readonly'] = True
 
+RoadSegmentExtRoadConditionSurveyFormSet = inlineformset_factory(RoadSegmentExt, RoadConditionSurvey, form=RoadConditionSurveyForm, extra=2)
 
 
 

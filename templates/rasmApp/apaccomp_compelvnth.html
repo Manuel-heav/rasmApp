@@ -4,6 +4,7 @@
 {% load humanize %}
 {% load calc %}
 
+
 <style>
     .container {
       max-width: 100%;
@@ -86,30 +87,30 @@
             <th colspan="9" style="text-align: center; vertical-align:middle">ፊዚካል</th>
         </tr>
         <tr>
-          <th>የ10 ወራት ዕቅድ  (ብር)</th>
-          <th>የ10 ወራት ክንውን  (ብር)</th>
-          <th>የ10 ወራት ንጽጽር (%)</th>
-          <th>የግንቦት ወር ዕቅድ  (ብር)</th>
-          <th>የግንቦት ወር ክንውን  (ብር)</th>
-          <th>የወሩ ንጽጽር (%)</th>
-          <th>የ11 ወራት ዕቅድ</th>
-          <th>የ11 ወራት ክንውን</th>
-          <th>የ11 ወራት ንጽጽር (%)</th>
-          <th>የ10 ወራት ዕቅድ  (ኪ.ሜ)</th>
-          <th>የ10 ወራት ክንውን  (ኪ.ሜ)</th>
-          <th>የ10 ወራት ንጽጽር (%)</th>
-          <th>የግንቦት ወር ዕቅድ  (ኪ.ሜ)</th>
-          <th>የግንቦት ወር ክንውን  (ኪ.ሜ)</th>
-          <th>የወሩ ንጽጽር (%)</th>
-          <th>የ11 ወራት ዕቅድ</th>
-          <th>የ11 ወራት ክንውን</th>
-          <th>የ11 ወራት ንጽጽር (%)</th>
+        <th>የ10 ወራት ዕቅድ  (ብር)</th>
+        <th>የ10 ወራት ክንውን  (ብር)</th>
+        <th>የ10 ወራት ንጽጽር (%)</th>
+        <th>የግንቦት ወር ዕቅድ  (ብር)</th>
+        <th>የግንቦት ወር ክንውን  (ብር)</th>
+        <th>የወሩ ንጽጽር (%)</th>
+        <th>የ11 ወራት ዕቅድ</th>
+        <th>የ11 ወራት ክንውን</th>
+        <th>የ11 ወራት ንጽጽር (%)</th>
+        <th>የ10 ወራት ዕቅድ  (ኪ.ሜ)</th>
+        <th>የ10 ወራት ክንውን  (ኪ.ሜ)</th>
+        <th>የ10 ወራት ንጽጽር (%)</th>
+        <th>የግንቦት ወር ዕቅድ  (ኪ.ሜ)</th>
+        <th>የግንቦት ወር ክንውን  (ኪ.ሜ)</th>
+        <th>የወሩ ንጽጽር (%)</th>
+        <th>የ11 ወራት ዕቅድ</th>
+        <th>የ11 ወራት ክንውን</th>
+        <th>የ11 ወራት ንጽጽር (%)</th>
         </tr>
     </thead>
     <tbody>
-    {% for item, item2 in projelevenzip %}
+    {% for item, item2 in projeleventhzip %}
     <tr>
-      <td>{{item2.erabudget__bprojectname}}</td>
+      <td>{{item.erabudget__bprojectname}}</td>
       {% with prevap=item2.aptotalbr|subtract:item.aptotalpmonthbr %}
       <td>{{ prevap|floatformat:2|intcomma }}</td>
       {% endwith %}
@@ -140,7 +141,7 @@
       <td>{{item2.aptotalkm|floatformat:2|intcomma }}</td>
       <td>{{item2.acomptotalkm|floatformat:2|intcomma }}</td>
       <td>{{item2.phycomp|floatformat:2|intcomma }}</td>
-    </tr>
+  </tr>
     {% endfor %}
     </tbody>
 </table>

@@ -1,0 +1,117 @@
+{% extends "rasmApp/sidebarlayout.html" %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+{% load calc %}
+
+<style>
+    .container {
+      max-width: 100%;
+      padding: 20px;
+      transform: scale(0.9);
+      font-family: Arial, sans-serif;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      background-color: #f9f9f9;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    th, td {
+      padding: 18px !important;
+      vertical-align: middle;
+      border: none; /* Removed borders */
+    }
+  
+    th {
+      background-color: #F0F0F0;
+      color: #333;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  
+    td {
+      background-color: #FFF;
+      color: #333;
+    }
+  
+    tr:nth-child(even) td {
+      background-color: #F7F7F7; /* Alternating row background */
+    }
+  
+    tr:hover td {
+      background-color: #eaeaea; /* Hover effect */
+    }
+  
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      th, td {
+        padding: 8px;
+        font-size: 14px;
+      }
+    }
+  </style>
+  
+<br>
+<div class="container">
+  <form action="{% url 'allbyprojectfirst' %}" method="get">
+    <select name="fin">
+        <option selected disabled=true>--ፋይናንሰር--</option>
+        <option>All</option>
+        <option>መንገድ ፈንድ</option>
+        <option>ካፒታል በጀት</option>
+    </select>
+    <input type="submit" value="Search"><span style="float: right;"><span style="color:blue">ፋይናንሰር፡ </span><b>{{searchfin}}</b>&emsp;&emsp; </span>
+  </form>
+<hr>
+<table class="table">
+    <thead class="table-light">
+        <tr><th colspan="24" style="text-align: center; vertical-align:middle">የፕሮጀክቶች የመጀመሪያው ወር ዕቅድ ክንውን ማነጻጸሪያ </th></tr>
+        <tr>
+            <th rowspan="2" style="text-align: center; vertical-align:middle">ቅ/ጽ/ቤት</th>
+            <th rowspan="2" style="text-align: center; vertical-align:middle">የመንገድ ጥገና ዓይነት</th>
+            <th rowspan="2" style="text-align: center; vertical-align:middle">የመንገድ ጥገና ስራ ተቋራጮች</th>
+            <th rowspan="2" style="text-align: center; vertical-align:middle">የፕሮጀክቱ ስም</th>
+            <th colspan="9" style="text-align: center; vertical-align:middle">ፋይናንሺያል</th>
+            <th colspan="9" style="text-align: center; vertical-align:middle">ፊዚካል</th>
+        </tr>
+        <tr>
+          <th>የሐምሌ ወር ዕቅድ  (ብር)</th>
+          <th>የሐምሌ ወር ክንውን  (ብር)</th>
+          <th>የወሩ ንጽጽር (%)</th>
+          <th>የሐምሌ ወር ዕቅድ  (ኪ.ሜ)</th>
+          <th>የሐምሌ ወር ክንውን  (ኪ.ሜ)</th>
+          <th>የወሩ ንጽጽር (%)</th>
+        </tr>
+    </thead>
+    {% for item, item2 in contractoryrzip %}
+    <tr>
+        <td>{{item.erabudget__bdistrict__districtname}}</td>
+        <td>{{item.erabudget__bworktype__maintenancetype}}</td>
+        <td>{{item.erabudget__bcontractor}}</td>
+        <td>{{item.erabudget__bprojectname}}</td>
+        <td>{{item.aptotalpmonthbr|floatformat:2|intcomma}}</td>
+        <td>{{item.acomptotalpmonthbr|floatformat:2|intcomma}}</td>
+        <td>{{item.fincomppmonth|floatformat:2|intcomma }}</td>
+        <td>{{item.aptotalpmonthkm|floatformat:2|intcomma }}</td>
+        <td>{{item.acomptotalpmonthkm|floatformat:2|intcomma }}</td>
+        <td>{{item.phycomppmonth|floatformat:2|intcomma }}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td style="background: #f2f2f9 ;">ጠቅላላ ድምር</td>
+        <td style="background: #f2f2f9;">{{contraptpmbrsum|floatformat:2|intcomma }}</td>
+        <td style="background: #f2f2f9;">{{contracomptpmbrsum|floatformat:2|intcomma }}</td>
+        <td style="background: #f2f2f9;">{{ contracomptpmbrsum|divide:contraptpmbrsum |floatformat:2|intcomma}}</td>
+                        
+        <td style="background: #f2f2f9;">{{contraptpmkmsum|floatformat:2|intcomma }}</td>
+        <td style="background: #f2f2f9;">{{contracomptpmkmsum|floatformat:2|intcomma }}</td>
+        <td style="background: #f2f2f9;">{{ contracomptpmkmsum|divide:contraptpmkmsum |floatformat:2|intcomma}}</td>
+        
+    </tr>
+</table>
+</div>
+{% endblock %}

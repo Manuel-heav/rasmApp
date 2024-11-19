@@ -58,9 +58,19 @@
 
 <br>
 <div class="container">
+  <form action="{% url 'contractor_apacompcomp_yr' %}" method="get">
+    <select name="fin">
+        <option selected disabled=true>--ፋይናንሰር--</option>
+        <option>All</option>
+        <option>መንገድ ፈንድ</option>
+        <option>ካፒታል በጀት</option>
+    </select>
+    <input type="submit" value="Search"><span style="float: right;"><span style="color:blue">ፋይናንሰር፡ </span><b>{{searchfin}}</b>&emsp;&emsp; </span>
+  </form>
+<hr>
 <table class="table">
     <thead class="table-light">
-        <tr><th colspan="21" style="text-align: center; vertical-align:middle">የመንገድ ጥገና ስራ ተቋራጮች የአንድ ዓመት ዕቅድ ክንውን ማነጻጸሪያ </th></tr>
+        <tr><th colspan="21" style="text-align: center; vertical-align:middle">የመንገድ ጥገና ስራ ተቋራጮች የአስራ ሁለት ወራት ዕቅድ ክንውን ማነጻጸሪያ </th></tr>
         <tr>
             <th rowspan="2" style="text-align: center; vertical-align:middle">የመንገድ ጥገና ስራ ተቋራጮች</th>
             <th colspan="9" style="text-align: center; vertical-align:middle">ፋይናንሺያል</th>
@@ -73,18 +83,18 @@
           <th>የሰኔ ወር ዕቅድ  (ብር)</th>
           <th>የሰኔ ወር ክንውን  (ብር)</th>
           <th>የወሩ ንጽጽር (%)</th>
-          <th>የአንድ ዓመት ዕቅድ</th>
-          <th>የአንድ ዓመት ክንውን</th>
-          <th>የአንድ ዓመት ንጽጽር (%)</th>
+          <th>የአስራ ሁለት ወራት ዕቅድ (ብር)</th>
+          <th>የአስራ ሁለት ወራት ክንውን (ብር)</th>
+          <th>የአስራ ሁለት ወራት ንጽጽር (%)</th>
           <th>የ11 ወራት ዕቅድ  (ኪ.ሜ)</th>
           <th>የ11 ወራት ክንውን  (ኪ.ሜ)</th>
           <th>የ11 ወራት ንጽጽር (%)</th>
           <th>የሰኔ ወር ዕቅድ  (ኪ.ሜ)</th>
           <th>የሰኔ ወር ክንውን  (ኪ.ሜ)</th>
           <th>የወሩ ንጽጽር (%)</th>
-          <th>የአንድ ዓመት ዕቅድ</th>
-          <th>የአንድ ዓመት ክንውን</th>
-          <th>የአንድ ዓመት ንጽጽር (%)</th>
+          <th>የአስራ ሁለት ወራት ዕቅድ (ኪ.ሜ)</th>
+          <th>የአስራ ሁለት ወራት ክንውን (ኪ.ሜ)</th>
+          <th>የአስራ ሁለት ወራት ንጽጽር (%)</th>
         </tr>
     </thead>
     {% for item, item2 in contractoryrzip %}

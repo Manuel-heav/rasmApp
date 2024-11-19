@@ -2,6 +2,7 @@
 {% block content %}
 {% load static %}
 {% load humanize %}
+{% load calc %}
 
 <style>
     .container {
@@ -59,19 +60,25 @@
 <div class="container">
 <table id="dataTable" class="table">
     <thead class="table-light">
-        <tr><th colspan="13" style="text-align: center; vertical-align:middle">የሁለት ወራት ዕቅድ ክንውን ማነጻጸሪያ - በእያንዳንዱ ፕሮጀክት</th></tr>
+        <tr><th colspan="21" style="text-align: center; vertical-align:middle">የሁለት ወራት ዕቅድ ክንውን ማነጻጸሪያ - በእያንዳንዱ ፕሮጀክት</th></tr>
         <tr>
             <th rowspan="2" style="text-align: center; vertical-align:middle">የፕሮጀክቱ ስም</th>
-            <th colspan="6" style="text-align: center; vertical-align:middle">ፋይናንሺያል</th>
-            <th colspan="6" style="text-align: center; vertical-align:middle">ፊዚካል</th>
+            <th colspan="9" style="text-align: center; vertical-align:middle">ፋይናንሺያል</th>
+            <th colspan="9" style="text-align: center; vertical-align:middle">ፊዚካል</th>
         </tr>
         <tr>
+        <th>የሐምሌ ወር ዕቅድ  (ብር)</th>
+        <th>የሐምሌ ወር ክንውን  (ብር)</th>
+        <th>የሐምሌ ወር ንጽጽር (%)</th>
         <th>የነሃሴ ወር ዕቅድ  (ብር)</th>
         <th>የነሃሴ ወር ክንውን  (ብር)</th>
         <th>የወሩ ንጽጽር (%)</th>
         <th>የ2 ወራት ዕቅድ</th>
         <th>የ2 ወራት ክንውን</th>
         <th>የ2 ወራት ንጽጽር (%)</th>
+        <th>የሐምሌ ወር ዕቅድ  (ኪ.ሜ)</th>
+        <th>የሐምሌ ወር ክንውን  (ኪ.ሜ)</th>
+        <th>የሐምሌ ወር ንጽጽር (%)</th>
         <th>የነሃሴ ወር ዕቅድ  (ኪ.ሜ)</th>
         <th>የነሃሴ ወር ክንውን  (ኪ.ሜ)</th>
         <th>የወሩ ንጽጽር (%)</th>
@@ -81,21 +88,39 @@
         </tr>
     </thead>
     <tbody>
-    {% for item, item2 in zipscnd %}
+    {% for item, item2 in projsecondzip %}
     <tr>
-        <td>{{item.erabudget__bprojectname}}</td>
-        <td>{{item.budgetedap__bapinBr|floatformat:2|intcomma}}</td>
-        <td>{{item.actionInBr|floatformat:2|intcomma}}</td>
-        <td>{{item.compf|floatformat:2|intcomma }}</td>
-        <td>{{item2.aptotalbr|floatformat:2|intcomma }}</td>
-        <td>{{item2.acomptotalbr|floatformat:2|intcomma }}</td>
-        <td>{{item2.fincomp|floatformat:2|intcomma }}</td>
-        <td>{{item.budgetedap__bapinKm|floatformat:2|intcomma }}</td>
-        <td>{{item.actionInKm|floatformat:2|intcomma }}</td>
-        <td>{{item.compl|floatformat:2|intcomma }}</td>
-        <td>{{item2.aptotalkm|floatformat:2|intcomma }}</td>
-        <td>{{item2.acomptotalkm|floatformat:2|intcomma }}</td>
-        <td>{{item2.phycomp|floatformat:2|intcomma }}</td>
+      <td>{{item.erabudget__bprojectname}}</td>
+      {% with prevap=item2.aptotalbr|subtract:item.aptotalpmonthbr %}
+      <td>{{ prevap|floatformat:2|intcomma }}</td>
+      {% endwith %}
+      {% with prevacomp=item2.acomptotalbr|subtract:item.acomptotalpmonthbr %}
+      <td>{{ prevacomp|floatformat:2|intcomma }}</td>
+      {% endwith %}
+      {% with prevacomp=item2.acomptotalbr|subtract:item.acomptotalpmonthbr prevap=item2.aptotalbr|subtract:item.aptotalpmonthbr %}
+      <td>{{ prevacomp|divide:prevap |floatformat:2|intcomma}}</td>
+      {% endwith %}
+      <td>{{item.aptotalpmonthbr|floatformat:2|intcomma}}</td>
+      <td>{{item.acomptotalpmonthbr|floatformat:2|intcomma}}</td>
+      <td>{{item.fincomppmonth|floatformat:2|intcomma }}</td>
+      <td>{{item2.aptotalbr|floatformat:2|intcomma }}</td>
+      <td>{{item2.acomptotalbr|floatformat:2|intcomma }}</td>
+      <td>{{item2.fincomp|floatformat:2|intcomma }}</td>
+      {% with prevapkm=item2.aptotalkm|subtract:item.aptotalpmonthkm %}
+      <td>{{ prevapkm|floatformat:2|intcomma }}</td>
+      {% endwith %}
+      {% with prevacompkm=item2.acomptotalkm|subtract:item.acomptotalpmonthkm %}
+      <td>{{ prevacompkm|floatformat:2|intcomma }}</td>
+      {% endwith %}
+      {% with prevacompkm=item2.acomptotalkm|subtract:item.acomptotalpmonthkm prevapkm=item2.aptotalkm|subtract:item.aptotalpmonthkm %}
+      <td>{{ prevacompkm|divide:prevapkm |floatformat:2|intcomma}}</td>
+      {% endwith %}
+      <td>{{item.aptotalpmonthkm|floatformat:2|intcomma }}</td>
+      <td>{{item.acomptotalpmonthkm|floatformat:2|intcomma }}</td>
+      <td>{{item.phycomppmonth|floatformat:2|intcomma }}</td>
+      <td>{{item2.aptotalkm|floatformat:2|intcomma }}</td>
+      <td>{{item2.acomptotalkm|floatformat:2|intcomma }}</td>
+      <td>{{item2.phycomp|floatformat:2|intcomma }}</td>
     </tr>
     {% endfor %}
     </tbody>

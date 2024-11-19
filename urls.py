@@ -119,7 +119,22 @@ urlpatterns = [
     path('intervention_apacompcomp_eleven/', views.intervention_summary_eleventhm, name="intervention_apacompcomp_eleven"),
     path('intervention_apacompcomp_yr/', views.intervention_summary_yr, name="intervention_apacompcomp_yr"),
     
-    
+
+    path('allbyprojectfirst/', views.allbyproject_first, name="allbyprojectfirst"),
+    path('allbyprojectsecond/', views.allbyproject_second, name="allbyprojectsecond"),
+    path('allbyprojectthird/', views.allbyproject_third, name="allbyprojectthird"),
+    path('allbyprojectfourth/', views.allbyproject_fourth, name="allbyprojectfourth"),
+    path('allbyprojectfifth/', views.allbyproject_fifth, name="allbyprojectfifth"),
+    path('allbyprojectsixth/', views.allbyproject_sixth, name="allbyprojectsixth"),
+    path('allbyprojectseventh/', views.allbyproject_seventh, name="allbyprojectseventh"),
+    path('allbyprojecteighth/', views.allbyproject_eighth, name="allbyprojecteighth"),
+    path('allbyprojectnineth/', views.allbyproject_nineth, name="allbyprojectnineth"),
+    path('allbyprojecttenth/', views.allbyproject_tenth, name="allbyprojecttenth"),
+    path('allbyprojecteleventh/', views.allbyproject_eleventh, name="allbyprojecteleventh"),
+    path('allbyproject_yr/', views.allbyproject_yr, name="allbyproject_yr"),
+
+
+
     path('financer_apaccomp_compyr/', views.financer_compare_yr, name="financer_apaccomp_compyr"),
 
 
@@ -292,14 +307,14 @@ urlpatterns = [
 
 
     path('road_segments/', views.road_segment_list, name="road_segments"),
-    path('road_segment_exts/<str:pk>/', views.road_segment_ext, name="road_segment_exts"),
-    path('roadconditionsurvey/', views.create_condition_survey, name="roadconditionsurvey"),
+    path('road_segment_exts/', views.road_segment_ext, name="road_segment_exts"),
+    path('roadsegmentdetail/<str:pk>/', views.road_segment_detail, name="roadsegmentdetail"),
+    path('condition_survey_form/<str:pk>/', views.create_condition_survey, name="condition_survey_form"),
     path('road_condition_survey_list/', views.coditionlst, name="road_condition_survey_list"),
     path('roadconditionsummary/', views.condition_summary, name="roadconditionsummary"),
     path('bill_of_qty/<str:pk>/', views.boq, name="bill_of_qty"),
     path('road_condition_detail/<str:pk>/', views.road_condition_detail, name="road_condition_detail"),
     path('roadsegext/', views.roadsegext, name="roadsegext"),
-
 
 
     
